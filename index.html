@@ -1,0 +1,4270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPortal — Swami Atmanand College</title>
+<meta name="theme-color" content="#2563eb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EduPortal">
+<meta name="description" content="Swami Atmanand Govt. English Medium Model College Student Portal">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7fa;
+  --white: #ffffff;
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --blue-light: #eff6ff;
+  --blue-mid: #bfdbfe;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --orange: #ea580c;
+  --orange-light: #fff7ed;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --red: #dc2626;
+  --text: #1e293b;
+  --text2: #475569;
+  --muted: #94a3b8;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* ── AUTH SCREEN ── */
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  padding: 20px;
+}
+
+.auth-box {
+  background: white;
+  border-radius: 20px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-logo .college-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+.auth-logo .college-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.auth-logo .app-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.role-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.role-tab {
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--muted);
+  border: none;
+  background: transparent;
+}
+
+.role-tab.active {
+  background: white;
+  color: var(--blue);
+  box-shadow: var(--shadow);
+}
+
+.form-group { margin-bottom: 14px; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: white;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus { border-color: var(--blue); }
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: white;
+}
+
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+.btn-secondary {
+  background: var(--bg);
+  color: var(--text2);
+  margin-top: 8px;
+}
+
+.btn-secondary:hover { background: var(--border); }
+
+.btn-green { background: var(--green); color: white; }
+
+.otp-box {
+  width: 52px !important;
+  height: 52px !important;
+  text-align: center;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--border) !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  color: var(--blue) !important;
+  transition: border-color 0.2s;
+}
+.otp-box:focus { border-color: var(--blue) !important; outline: none; }
+
+.btn-green:hover { background: #15803d; }
+
+.auth-switch {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.auth-switch a {
+  color: var(--blue);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ── APP SHELL ── */
+.app { display: none; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 220px;
+  background: white;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+
+.sidebar-logo {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-logo .s-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1.3;
+}
+
+.sidebar-logo .s-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.sidebar-user {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+}
+
+.avatar-student { background: var(--blue-light); color: var(--blue); }
+.avatar-faculty { background: var(--purple-light); color: var(--purple); }
+
+.user-info .u-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.user-info .u-role {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.nav-section {
+  padding: 10px 10px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  padding: 8px 8px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+
+.nav-item:hover { background: var(--bg); color: var(--text); }
+.nav-item.active { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+.nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text2);
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* Main content */
+.main {
+  margin-left: 220px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card-body { padding: 16px 20px; }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+
+/* Stat cards */
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stat-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.stat-val { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+
+/* Class items */
+.class-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bg);
+}
+
+.class-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.class-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  width: 80px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.class-info { flex: 1; }
+
+.class-subject {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.class-teacher {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.badge-live { background: #dcfce7; color: #16a34a; }
+.badge-done { background: var(--bg); color: var(--muted); }
+.badge-next { background: var(--blue-light); color: var(--blue); }
+
+/* File items */
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  transition: all 0.15s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.file-item:hover { border-color: var(--blue); background: var(--blue-light); }
+
+.file-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.file-info { flex: 1; min-width: 0; }
+.file-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.file-action {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+/* Assignment items */
+.assign-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  background: white;
+}
+
+.assign-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.assign-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.assign-subject {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.assign-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.assign-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.assign-due {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.assign-due.urgent { color: var(--red); font-weight: 600; }
+
+/* Syllabus */
+.syllabus-subject {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.syllabus-subject-header {
+  padding: 12px 16px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  user-select: none;
+}
+
+.syllabus-subject-header:hover { background: var(--blue-light); }
+
+.syllabus-topics {
+  padding: 12px 16px;
+  display: none;
+  border-top: 1px solid var(--border);
+}
+
+.syllabus-topics.open { display: block; }
+
+.topic-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: var(--text2);
+  border-bottom: 1px dashed var(--border);
+}
+
+.topic-item:last-child { border-bottom: none; }
+.topic-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); width: 20px; }
+
+/* Faculty upload form */
+.upload-form {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.upload-form h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-group-inline { }
+
+.form-group-inline label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.form-group-inline input,
+.form-group-inline select,
+.form-group-inline textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.form-group-inline input:focus,
+.form-group-inline select:focus,
+.form-group-inline textarea:focus { border-color: var(--blue); }
+
+.upload-area {
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 12px 0;
+}
+
+.upload-area:hover { border-color: var(--blue); background: var(--blue-light); }
+.upload-area .upload-icon { font-size: 28px; margin-bottom: 6px; }
+.upload-area p { font-size: 12px; color: var(--muted); }
+.upload-area p strong { color: var(--blue); }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9999;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+
+.empty-state .e-icon { font-size: 36px; margin-bottom: 10px; }
+.empty-state p { font-size: 13px; }
+
+/* Mobile nav */
+.mob-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: white;
+  border-top: 1px solid var(--border);
+  z-index: 200;
+  padding: 8px 0 env(safe-area-inset-bottom);
+}
+
+.mob-nav-inner {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mob-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  transition: all 0.15s;
+  border: none;
+  background: none;
+}
+
+.mob-nav-item.active { color: var(--blue); }
+.mob-nav-item .mob-icon { font-size: 20px; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 300;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Top bar with logout — mobile only */
+.topbar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  z-index: 299;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 56px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.topbar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-logout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.topbar-logout:hover { background: #dc2626; color: white; }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 99;
+}
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: block; }
+  .topbar { display: flex; }
+  .main { margin-left: 0; padding: 16px; padding-top: 64px; padding-bottom: 80px; }
+  .mob-nav { display: block; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .app-nav { display: none; }
+}
+
+.divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chip-blue { background: var(--blue-light); color: var(--blue); }
+.chip-green { background: var(--green-light); color: var(--green); }
+.chip-orange { background: var(--orange-light); color: var(--orange); }
+.chip-purple { background: var(--purple-light); color: var(--purple); }
+
+.submit-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--blue);
+  color: white;
+}
+
+.submit-btn:hover { background: var(--blue-dark); }
+
+.posted-by { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.no-data { 
+  padding: 30px; 
+  text-align: center; 
+  color: var(--muted); 
+  font-size: 13px; 
+}
+.del-btn { background:#fef2f2; border:1px solid #fecaca; color:#dc2626; border-radius:6px; padding:3px 10px; font-size:11px; font-weight:700; cursor:pointer; transition:all 0.15s; }
+.del-btn:hover { background:#dc2626; color:white; }
+</style>
+<!-- Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyBNNLtuCIjhg-ChtvKSl-Bb_MW3t742m2k",
+    authDomain: "swami-atmanand.firebaseapp.com",
+    projectId: "swami-atmanand",
+    storageBucket: "swami-atmanand.firebasestorage.app",
+    messagingSenderId: "1022019351480",
+    appId: "1:1022019351480:web:9f905d26768873b8b6554d"
+  });
+  const db   = firebase.firestore();
+  const auth = firebase.auth();
+
+  // Use phone number as the user identifier in Firestore.
+  // Firebase Auth handles the real OTP via SMS — we never touch the OTP value ourselves.
+  window.FB = {
+    async saveUser(role, phone, data) { await db.collection(role+'s').doc(phone).set(data); },
+    async getUser(role, phone) { const s = await db.collection(role+'s').doc(phone).get(); return s.exists ? s.data() : null; },
+    async addItem(col, data) { await db.collection(col).add({...data, createdAt: Date.now()}); },
+    listen(col, cb) { return db.collection(col).orderBy('createdAt','desc').onSnapshot(s => cb(s.docs.map(d => ({id:d.id,...d.data()})))); },
+    async deleteItem(col, id) { await db.collection(col).doc(id).delete(); }
+  };
+  window.FB_READY = true;
+  console.log('✅ Firebase connected!');
+</script>
+</head>
+<body>
+
+<!-- ═══ AUTH SCREEN ═══ -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <div class="college-name">Swami Atmanand Govt. English Medium Model College</div>
+      <div class="college-sub">Somni, Rajnandgaon · Affiliated to Hemchand Yadav Vishwavidyalay, Durg</div>
+      <div class="app-name">📚 EduPortal</div>
+    </div>
+
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="switchRole('student')">🎓 Student</button>
+      <button class="role-tab" onclick="switchRole('faculty')">👨‍🏫 Faculty</button>
+    </div>
+
+    <!-- ── STUDENT AUTH ── -->
+    <div id="studentAuth">
+
+      <!-- LOGIN view (default) -->
+      <div id="s-login-view">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="s-email" placeholder="your@email.com" autocomplete="email">
+          <div id="s-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div style="position:relative">
+            <input type="password" id="s-password" placeholder="Enter your password"
+                   autocomplete="current-password" style="width:100%;padding-right:42px">
+            <button onclick="togglePass('s-password')"
+                    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                           background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+          </div>
+          <div id="s-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <button class="btn btn-primary" id="s-login-btn" onclick="sLogin()">Login →</button>
+        <div style="display:flex;justify-content:space-between;margin-top:10px">
+          <button onclick="showStudentRegister()"
+                  style="background:none;border:none;color:var(--blue);font-size:12px;
+                         cursor:pointer;font-weight:600;padding:0">
+            New student? Register
+          </button>
+          <button onclick="forgotPassword('student')"
+                  style="background:none;border:none;color:var(--muted);font-size:12px;
+                         cursor:pointer;padding:0">
+            Forgot password?
+          </button>
+        </div>
+      </div>
+
+      <!-- REGISTER view (new students) -->
+      <div id="s-register-view" style="display:none">
+        <div style="background:var(--blue-light);border-radius:10px;padding:10px 14px;
+                    margin-bottom:14px;font-size:12px;color:var(--blue);font-weight:600">
+          👋 New here! Create your account.
+        </div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="s-reg-name" placeholder="Your full name">
+          <div id="s-reg-name-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none">Name is required</div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="s-reg-email" placeholder="your@email.com" autocomplete="email">
+          <div id="s-reg-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Password <span style="color:var(--muted);font-weight:400">(min 6 characters)</span></label>
+          <div style="position:relative">
+            <input type="password" id="s-reg-password" placeholder="Create a password"
+                   autocomplete="new-password" style="width:100%;padding-right:42px">
+            <button onclick="togglePass('s-reg-password')"
+                    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                           background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+          </div>
+          <div id="s-reg-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <select id="s-reg-dept">
+            <option value="">Select department</option>
+            <option value="BCA">BCA — Bachelor of Computer Application</option>
+            <option value="BSC CS">BSC CS — Bachelor of Science (Computer Science)</option>
+            <option value="BSC BIO">BSC BIO — Bachelor of Science (Biology)</option>
+            <option value="BCOM">BCOM — Bachelor of Commerce</option>
+            <option value="BSC MATHS">BSC MATHS — Bachelor of Science (Mathematics)</option>
+          </select>
+          <div id="s-reg-dept-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none">Select your department</div>
+        </div>
+        <div class="form-group">
+          <label>Semester</label>
+          <select id="s-reg-sem">
+            <option value="">Select semester</option>
+            <option value="Sem I">Semester I</option>
+            <option value="Sem II">Semester II</option>
+            <option value="Sem III">Semester III</option>
+            <option value="Sem IV">Semester IV</option>
+            <option value="Sem V">Semester V</option>
+            <option value="Sem VI">Semester VI</option>
+          </select>
+          <div id="s-reg-sem-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none">Select your semester</div>
+        </div>
+        <button class="btn btn-primary" id="s-register-btn" onclick="sRegister()">Create Account & Enter →</button>
+        <button class="btn btn-secondary" onclick="showStudentLogin()" style="margin-top:8px">← Back to Login</button>
+      </div>
+
+    </div>
+
+    <!-- ── FACULTY AUTH ── -->
+    <div id="facultyAuth" style="display:none">
+
+      <!-- LOGIN view -->
+      <div id="f-login-view">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="f-email" placeholder="faculty@email.com" autocomplete="email">
+          <div id="f-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div style="position:relative">
+            <input type="password" id="f-password" placeholder="Enter your password"
+                   autocomplete="current-password" style="width:100%;padding-right:42px">
+            <button onclick="togglePass('f-password')"
+                    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                           background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+          </div>
+          <div id="f-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <button class="btn btn-primary" id="f-login-btn" onclick="fLogin()">Login →</button>
+        <div style="display:flex;justify-content:space-between;margin-top:10px">
+          <button onclick="showFacultyRegister()"
+                  style="background:none;border:none;color:var(--purple);font-size:12px;
+                         cursor:pointer;font-weight:600;padding:0">
+            New faculty? Register
+          </button>
+          <button onclick="forgotPassword('faculty')"
+                  style="background:none;border:none;color:var(--muted);font-size:12px;
+                         cursor:pointer;padding:0">
+            Forgot password?
+          </button>
+        </div>
+      </div>
+
+      <!-- REGISTER view -->
+      <div id="f-register-view" style="display:none">
+        <div style="background:var(--purple-light);border-radius:10px;padding:10px 14px;
+                    margin-bottom:14px;font-size:12px;color:var(--purple);font-weight:600">
+          👋 New faculty! Create your account.
+        </div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="f-reg-name" placeholder="Your full name">
+          <div id="f-reg-name-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none">Name is required</div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="f-reg-email" placeholder="faculty@email.com" autocomplete="email">
+          <div id="f-reg-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Password <span style="color:var(--muted);font-weight:400">(min 6 characters)</span></label>
+          <div style="position:relative">
+            <input type="password" id="f-reg-password" placeholder="Create a password"
+                   autocomplete="new-password" style="width:100%;padding-right:42px">
+            <button onclick="togglePass('f-reg-password')"
+                    style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                           background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+          </div>
+          <div id="f-reg-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <select id="f-reg-dept">
+            <option value="">Select department</option>
+            <option value="Computer Application">Computer Application</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Botany">Botany</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
+            <option value="English">English</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Commerce">Commerce</option>
+            <option value="Administration">Administration</option>
+          </select>
+          <div id="f-reg-dept-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none">Select your department</div>
+        </div>
+        <div class="form-group">
+          <label>Faculty Secret Code</label>
+          <input type="password" id="f-reg-code" placeholder="Enter secret faculty code" autocomplete="off">
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">
+            🔒 Get this from your Principal. Do not share it.
+          </div>
+          <div id="f-reg-code-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <button class="btn btn-primary" id="f-register-btn" onclick="fRegister()">Create Faculty Account →</button>
+        <button class="btn btn-secondary" onclick="showFacultyLogin()" style="margin-top:8px">← Back to Login</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div class="app" id="appShell">
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="s-name">Swami Atmanand Model College</div>
+      <div class="s-sub">📚 EduPortal</div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebarAvatar">DS</div>
+      <div class="user-info">
+        <div class="u-name" id="sidebarName">Demo Student</div>
+        <div class="u-role" id="sidebarRole">BCA · Sem II</div>
+      </div>
+    </div>
+
+    <!-- Student nav -->
+    <div class="nav-section" id="studentNav">
+      <div class="nav-label">Student</div>
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">🏠</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('classes')">
+        <span class="nav-icon">📅</span> My Classes
+      </div>
+      <div class="nav-item" onclick="showPage('notes')">
+        <span class="nav-icon">📁</span> Notes
+      </div>
+      <div class="nav-item" onclick="showPage('syllabus')">
+        <span class="nav-icon">📋</span> Syllabus
+      </div>
+      <div class="nav-item" onclick="showPage('assignments')">
+        <span class="nav-icon">📝</span> Assignments
+      </div>
+      <div class="nav-item" onclick="showPage('notices')">
+        <span class="nav-icon">📢</span> Notices
+      </div>
+      <div class="nav-item" onclick="showPage('exams')">
+        <span class="nav-icon">📅</span> Exam Dates
+      </div>
+      <div class="nav-item" onclick="showPage('links')">
+        <span class="nav-icon">🔗</span> Quick Links
+      </div>
+    </div>
+
+    <!-- Faculty nav -->
+    <div class="nav-section" id="facultyNav" style="display:none">
+      <div class="nav-label">Faculty</div>
+      <div class="nav-item active" onclick="showPage('f-dashboard')">
+        <span class="nav-icon">🏠</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('f-upload-notes')">
+        <span class="nav-icon">📤</span> Upload Notes
+      </div>
+      <div class="nav-item" onclick="showPage('f-upload-syllabus')">
+        <span class="nav-icon">📋</span> Upload Syllabus
+      </div>
+      <div class="nav-item" onclick="showPage('f-assignments')">
+        <span class="nav-icon">📝</span> Post Assignment
+      </div>
+      <div class="nav-item" onclick="showPage('f-my-uploads')">
+        <span class="nav-icon">📂</span> My Uploads
+      </div>
+      <div class="nav-item" onclick="showPage('f-notices')">
+        <span class="nav-icon">📢</span> Post Notice
+      </div>
+      <div class="nav-item" onclick="showPage('f-exams')">
+        <span class="nav-icon">📅</span> Exam Dates
+      </div>
+      <div class="nav-item" onclick="showPage('f-timetable')">
+        <span class="nav-icon">🗓️</span> Timetable
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">← Logout</button>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+  <!-- Top bar (mobile only) -->
+  <div class="topbar" id="topbar">
+    <div class="topbar-title" id="topbarTitle">EduPortal</div>
+    <button class="topbar-logout" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div class="main">
+
+    <!-- STUDENT: Dashboard -->
+    <div class="section active" id="page-dashboard">
+      <div class="page-header">
+        <div class="page-title" id="dashGreet">Good morning 👋</div>
+        <div class="page-sub" id="dashSub">Here's your overview for today</div>
+      </div>
+
+      <div class="grid-3" id="dashStats">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--blue-light)">📅</div>
+          <div>
+            <div class="stat-val" id="stat-classes">0</div>
+            <div class="stat-label">Classes Today</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--orange-light)">📝</div>
+          <div>
+            <div class="stat-val" id="stat-assign">0</div>
+            <div class="stat-label">Assignments Due</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--green-light)">📁</div>
+          <div>
+            <div class="stat-val" id="stat-notes">0</div>
+            <div class="stat-label">Notes Available</div>
+          </div>
+        </div>
+        <div class="stat-card" style="cursor:pointer" onclick="showPage('notices')">
+          <div class="stat-icon" style="background:#ecfeff">📢</div>
+          <div>
+            <div class="stat-val" id="stat-notices">0</div>
+            <div class="stat-label">Notices</div>
+          </div>
+        </div>
+        <div class="stat-card" style="cursor:pointer" onclick="showPage('exams')">
+          <div class="stat-icon" style="background:#fdf4ff">📅</div>
+          <div>
+            <div class="stat-val" id="stat-exams">0</div>
+            <div class="stat-label">Upcoming Exams</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📅 Today's Classes</div>
+            <span style="font-size:12px;color:var(--blue);cursor:pointer" onclick="showPage('classes')">View all</span>
+          </div>
+          <div class="card-body" id="dashClasses">
+            <div class="no-data">Loading...</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📝 Recent Assignments</div>
+            <span style="font-size:12px;color:var(--blue);cursor:pointer" onclick="showPage('assignments')">View all</span>
+          </div>
+          <div class="card-body" id="dashAssignments">
+            <div class="no-data">No assignments yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Classes -->
+    <div class="section" id="page-classes">
+      <div class="page-header">
+        <div class="page-title">📅 My Classes</div>
+        <div class="page-sub" id="classSub">Today's timetable</div>
+      </div>
+      <div class="card">
+        <div class="card-body" id="classesContent">
+          <div class="no-data">Loading timetable...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Notes -->
+    <div class="section" id="page-notes">
+      <div class="page-header">
+        <div class="page-title">📁 Notes</div>
+        <div class="page-sub">Faculty materials + peer-shared student notes</div>
+      </div>
+
+      <!-- ── SECTION A: Faculty Notes (authoritative) ── -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:var(--text)">📚 Faculty Notes</div>
+        <span style="font-size:10px;font-weight:700;background:var(--blue-light);
+                     color:var(--blue);border:1px solid var(--blue-mid);
+                     padding:2px 8px;border-radius:20px;">VERIFIED</span>
+      </div>
+      <div id="notesContent" style="margin-bottom:24px">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">📭</div>
+          <p>No notes uploaded yet.<br>Check back after your faculty uploads materials.</p>
+        </div>
+      </div>
+
+      <!-- ── SECTION B: Student Notes ── -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:var(--text)">👥 Student Notes</div>
+        <span style="font-size:10px;font-weight:700;background:#f0fdf4;
+                     color:#16a34a;border:1px solid #bbf7d0;
+                     padding:2px 8px;border-radius:20px;">PEER SHARED</span>
+      </div>
+
+      <!-- Upload form (collapsible) -->
+      <div style="border:1px solid var(--border);border-radius:14px;
+                  overflow:hidden;margin-bottom:12px;">
+        <div onclick="toggleStudentNoteForm()"
+             style="display:flex;align-items:center;justify-content:space-between;
+                    padding:12px 16px;cursor:pointer;background:rgba(255,255,255,0.02);
+                    user-select:none;"
+             id="studentNoteFormToggle">
+          <div style="font-size:13px;font-weight:600;color:var(--text)">
+            ➕ Share Your Notes
+          </div>
+          <span id="studentNoteFormArrow" style="color:var(--muted);font-size:12px">▼ Expand</span>
+        </div>
+
+        <div id="studentNoteForm" style="display:none;padding:16px;
+             border-top:1px solid var(--border);background:rgba(255,255,255,0.01)">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:11px;font-weight:600;color:var(--muted);
+                            text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">
+                Title *
+              </label>
+              <input type="text" id="sn-title" placeholder="e.g. Unit 2 Notes"
+                     style="width:100%;padding:9px 12px;border:1px solid var(--border);
+                            border-radius:8px;font-size:13px;background:var(--bg);
+                            color:var(--text);outline:none;">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:600;color:var(--muted);
+                            text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">
+                Subject *
+              </label>
+              <input type="text" id="sn-subject" placeholder="e.g. C++ Programming"
+                     style="width:100%;padding:9px 12px;border:1px solid var(--border);
+                            border-radius:8px;font-size:13px;background:var(--bg);
+                            color:var(--text);outline:none;">
+            </div>
+          </div>
+
+          <div style="margin-bottom:10px">
+            <label style="font-size:11px;font-weight:600;color:var(--muted);
+                          text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">
+              Description (optional)
+            </label>
+            <input type="text" id="sn-desc" placeholder="Brief description..."
+                   style="width:100%;padding:9px 12px;border:1px solid var(--border);
+                          border-radius:8px;font-size:13px;background:var(--bg);
+                          color:var(--text);outline:none;">
+          </div>
+
+          <!-- File drop zone -->
+          <div id="sn-drop-zone"
+               onclick="document.getElementById('sn-file-input').click()"
+               ondragover="event.preventDefault();this.style.borderColor='#16a34a'"
+               ondragleave="this.style.borderColor='var(--border)'"
+               ondrop="handleStudentNoteFile(event.dataTransfer.files[0]);event.preventDefault();this.style.borderColor='var(--border)'"
+               style="border:2px dashed var(--border);border-radius:10px;padding:20px;
+                      text-align:center;cursor:pointer;transition:border-color 0.2s;margin-bottom:10px"
+               onmouseover="this.style.borderColor='#16a34a'"
+               onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:28px;margin-bottom:6px">📂</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px">
+              Click or drag & drop
+            </div>
+            <div style="font-size:11px;color:var(--muted)">PDF, JPG, PNG · Max 25MB</div>
+          </div>
+          <input type="file" id="sn-file-input" accept=".pdf,.jpg,.jpeg,.png"
+                 style="display:none"
+                 onchange="handleStudentNoteFile(this.files[0])">
+
+          <!-- File preview -->
+          <div id="sn-file-preview"
+               style="display:none;align-items:center;gap:10px;padding:10px 14px;
+                      background:#f0fdf4;border:1px solid #bbf7d0;
+                      border-radius:8px;margin-bottom:10px">
+            <div id="sn-file-icon" style="font-size:22px">📄</div>
+            <div style="flex:1">
+              <div id="sn-file-name" style="font-size:12px;font-weight:600;color:#166534"></div>
+              <div id="sn-file-size" style="font-size:11px;color:#16a34a;margin-top:1px"></div>
+            </div>
+            <button onclick="clearStudentNoteFile()"
+                    style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);
+                           color:#ef4444;border-radius:6px;padding:3px 8px;
+                           font-size:11px;cursor:pointer;font-weight:600">✕ Remove</button>
+          </div>
+
+          <button onclick="uploadStudentNote()"
+                  style="width:100%;padding:11px;background:#16a34a;color:white;
+                         border:none;border-radius:10px;font-size:13px;font-weight:700;
+                         cursor:pointer;transition:opacity 0.15s;"
+                  onmouseover="this.style.opacity='0.88'"
+                  onmouseout="this.style.opacity='1'">
+            📤 Share Note
+          </button>
+        </div>
+      </div>
+
+      <!-- Student notes list -->
+      <div id="studentNotesContent">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">👥</div>
+          <p>No student notes shared yet.<br>Be the first to share your notes!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Syllabus -->
+    <div class="section" id="page-syllabus">
+      <div class="page-header">
+        <div class="page-title">📋 Syllabus</div>
+        <div class="page-sub" id="syllabusSub">Your semester syllabus</div>
+      </div>
+      <a href="https://www.durguniversity.ac.in/notice/syllabus-ug-semester-exam" target="_blank" style="text-decoration:none;display:block;margin-bottom:14px">
+        <div class="file-item" style="border-color:var(--purple);background:var(--purple-light)">
+          <div class="file-icon" style="background:white">📋</div>
+          <div class="file-info">
+            <div class="file-name" style="color:var(--purple)">View Official University Syllabus</div>
+            <div class="file-meta">Hemchand Yadav Vishwavidyalay, Durg — Full UG Syllabus</div>
+          </div>
+          <div class="file-action" style="color:var(--purple)">Open ↗</div>
+        </div>
+      </a>
+      <!-- Faculty syllabus label -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:var(--text)">📚 Faculty Syllabus</div>
+        <span style="font-size:10px;font-weight:700;background:var(--blue-light);
+                     color:var(--blue);border:1px solid var(--blue-mid);
+                     padding:2px 8px;border-radius:20px;">OFFICIAL</span>
+      </div>
+      <div id="syllabusContent" style="margin-bottom:24px">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">📭</div>
+          <p>Syllabus not uploaded yet.<br>Your faculty will upload it soon.</p>
+        </div>
+      </div>
+
+      <!-- Student syllabus share section -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="font-size:13px;font-weight:700;color:var(--text)">👥 Student Shared Syllabus</div>
+        <span style="font-size:10px;font-weight:700;background:#fdf4ff;
+                     color:#9333ea;border:1px solid #e9d5ff;
+                     padding:2px 8px;border-radius:20px;">PEER SHARED</span>
+      </div>
+
+      <!-- Upload form (collapsible) -->
+      <div style="border:1px solid var(--border);border-radius:14px;
+                  overflow:hidden;margin-bottom:12px;">
+        <div onclick="toggleStudentSylForm()"
+             style="display:flex;align-items:center;justify-content:space-between;
+                    padding:12px 16px;cursor:pointer;background:rgba(255,255,255,0.02);
+                    user-select:none;" id="studentSylFormToggle">
+          <div style="font-size:13px;font-weight:600;color:var(--text)">
+            ➕ Share Syllabus File
+          </div>
+          <span id="studentSylFormArrow" style="color:var(--muted);font-size:12px">▼ Expand</span>
+        </div>
+
+        <div id="studentSylForm" style="display:none;padding:16px;
+             border-top:1px solid var(--border);background:rgba(255,255,255,0.01)">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:11px;font-weight:600;color:var(--muted);
+                            text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">
+                Subject Name *
+              </label>
+              <input type="text" id="ss-subject" placeholder="e.g. Data Structures"
+                     style="width:100%;padding:9px 12px;border:1px solid var(--border);
+                            border-radius:8px;font-size:13px;background:var(--bg);
+                            color:var(--text);outline:none;">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:600;color:var(--muted);
+                            text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:5px">
+                Description (optional)
+              </label>
+              <input type="text" id="ss-desc" placeholder="e.g. Unit 3 topics"
+                     style="width:100%;padding:9px 12px;border:1px solid var(--border);
+                            border-radius:8px;font-size:13px;background:var(--bg);
+                            color:var(--text);outline:none;">
+            </div>
+          </div>
+
+          <!-- File drop zone -->
+          <div id="ss-drop-zone"
+               onclick="document.getElementById('ss-file-input').click()"
+               ondragover="event.preventDefault();this.style.borderColor='#9333ea'"
+               ondragleave="this.style.borderColor='var(--border)'"
+               ondrop="handleStudentSylFile(event.dataTransfer.files[0]);event.preventDefault();this.style.borderColor='var(--border)'"
+               style="border:2px dashed var(--border);border-radius:10px;padding:20px;
+                      text-align:center;cursor:pointer;transition:border-color 0.2s;margin-bottom:10px"
+               onmouseover="this.style.borderColor='#9333ea'"
+               onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:28px;margin-bottom:6px">📂</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px">
+              Click or drag & drop
+            </div>
+            <div style="font-size:11px;color:var(--muted)">PDF, JPG, PNG · Max 25MB</div>
+          </div>
+          <input type="file" id="ss-file-input" accept=".pdf,.jpg,.jpeg,.png"
+                 style="display:none"
+                 onchange="handleStudentSylFile(this.files[0])">
+
+          <!-- File preview -->
+          <div id="ss-file-preview"
+               style="display:none;align-items:center;gap:10px;padding:10px 14px;
+                      background:#fdf4ff;border:1px solid #e9d5ff;
+                      border-radius:8px;margin-bottom:10px">
+            <div id="ss-file-icon" style="font-size:22px">📄</div>
+            <div style="flex:1">
+              <div id="ss-file-name" style="font-size:12px;font-weight:600;color:#6b21a8"></div>
+              <div id="ss-file-size" style="font-size:11px;color:#9333ea;margin-top:1px"></div>
+            </div>
+            <button onclick="clearStudentSylFile()"
+                    style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);
+                           color:#ef4444;border-radius:6px;padding:3px 8px;
+                           font-size:11px;cursor:pointer;font-weight:600">✕ Remove</button>
+          </div>
+
+          <button onclick="uploadStudentSyllabus()"
+                  style="width:100%;padding:11px;background:#9333ea;color:white;
+                         border:none;border-radius:10px;font-size:13px;font-weight:700;
+                         cursor:pointer;transition:opacity 0.15s;"
+                  onmouseover="this.style.opacity='0.88'"
+                  onmouseout="this.style.opacity='1'">
+            📤 Share Syllabus
+          </button>
+        </div>
+      </div>
+
+      <!-- Student syllabus list -->
+      <div id="studentSyllabusContent">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">👥</div>
+          <p>No syllabus shared by students yet.<br>Be the first to share!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Assignments -->
+    <div class="section" id="page-assignments">
+      <div class="page-header">
+        <div class="page-title">📝 Assignments</div>
+        <div class="page-sub">Assignments posted by your faculty</div>
+      </div>
+      <div id="assignmentsContent">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">📭</div>
+          <p>No assignments posted yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Notices -->
+    <div class="section" id="page-notices">
+      <div class="page-header">
+        <div class="page-title">📢 Notices</div>
+        <div class="page-sub">Important announcements from faculty</div>
+      </div>
+      <div id="noticesContent">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px">
+          <div class="e-icon">📭</div>
+          <p>No notices posted yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Exam Dates -->
+    <div class="section" id="page-exams">
+      <div class="page-header">
+        <div class="page-title">📅 Exam Dates</div>
+        <div class="page-sub">Upcoming exams & important dates</div>
+      </div>
+      <div id="examsContent">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px">
+          <div class="e-icon">📭</div>
+          <p>No exam dates added yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT: Quick Links -->
+    <div class="section" id="page-links">
+      <div class="page-header">
+        <div class="page-title">🔗 Quick Links</div>
+        <div class="page-sub">University & college resources</div>
+      </div>
+
+      <div style="margin-bottom:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">🎓 Hemchand Yadav Vishwavidyalay, Durg</div>
+
+      <div class="grid-2" style="margin-bottom:16px">
+        <a href="https://www.durguniversity.ac.in/notice/syllabus-ug-semester-exam" target="_blank" class="file-item" style="text-decoration:none">
+          <div class="file-icon" style="background:var(--purple-light)">📋</div>
+          <div class="file-info">
+            <div class="file-name">Syllabus</div>
+            <div class="file-meta">UG Semester Exam Syllabus</div>
+            <div class="file-meta" style="color:var(--purple)">durguniversity.ac.in ↗</div>
+          </div>
+        </a>
+        <a href="https://www.hyvonline.com/" target="_blank" class="file-item" style="text-decoration:none">
+          <div class="file-icon" style="background:var(--orange-light)">📝</div>
+          <div class="file-info">
+            <div class="file-name">Previous Year Questions</div>
+            <div class="file-meta">PYQs for all subjects</div>
+            <div class="file-meta" style="color:var(--orange)">hyvonline.com ↗</div>
+          </div>
+        </a>
+        <a href="https://durg.ucanapply.com/" target="_blank" class="file-item" style="text-decoration:none">
+          <div class="file-icon" style="background:var(--green-light)">🎓</div>
+          <div class="file-info">
+            <div class="file-name">Admission Portal</div>
+            <div class="file-meta">Apply for admission online</div>
+            <div class="file-meta" style="color:var(--green)">durg.ucanapply.com ↗</div>
+          </div>
+        </a>
+        <a href="https://durg.ucanapply.com/" target="_blank" class="file-item" style="text-decoration:none">
+          <div class="file-icon" style="background:var(--blue-light)">📊</div>
+          <div class="file-info">
+            <div class="file-name">Results & Student Login</div>
+            <div class="file-meta">Check exam results & login</div>
+            <div class="file-meta" style="color:var(--blue)">durg.ucanapply.com ↗</div>
+          </div>
+        </a>
+        <a href="https://www.durguniversity.ac.in/" target="_blank" class="file-item" style="text-decoration:none">
+          <div class="file-icon" style="background:#fef3c7">🏛️</div>
+          <div class="file-info">
+            <div class="file-name">University Website</div>
+            <div class="file-meta">Hemchand Yadav Vishwavidyalay</div>
+            <div class="file-meta" style="color:#d97706">durguniversity.ac.in ↗</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- College Info Card -->
+      <div style="margin-bottom:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">🏫 College Info & Contact</div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-body" style="padding:16px">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)">
+            <div style="width:48px;height:48px;border-radius:12px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🏛️</div>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.3">Swami Atmanand Govt. English Medium Model College</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px">Somni, Rajnandgaon, Chhattisgarh</div>
+              <div style="font-size:11px;color:var(--muted)">Affiliated to Hemchand Yadav Vishwavidyalay, Durg</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <a href="tel:+917712234567" style="text-decoration:none;display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px">
+              <span style="font-size:20px">📞</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:var(--text)">Phone</div>
+                <div style="font-size:11px;color:var(--muted)">Office Contact</div>
+              </div>
+            </a>
+            <a href="/cdn-cgi/l/email-protection#036e6c67666f606c6f6f666466706c6e6d6a43646e626a6f2d606c6e" style="text-decoration:none;display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px">
+              <span style="font-size:20px">📧</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:var(--text)">Email</div>
+                <div style="font-size:11px;color:var(--muted)"><span class="__cf_email__" data-cfemail="fb96949f9e97989497979e9c9e8894969592bb9c969a9297d5989496">[email&#160;protected]</span></div>
+              </div>
+            </a>
+            <a href="https://www.google.com/maps/search/Somni+Rajnandgaon+Chhattisgarh" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px">
+              <span style="font-size:20px">📍</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:var(--text)">Location</div>
+                <div style="font-size:11px;color:var(--muted)">Somni, Rajnandgaon</div>
+              </div>
+            </a>
+            <a href="https://www.durguniversity.ac.in/" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:10px;padding:10px;background:var(--bg);border-radius:10px">
+              <span style="font-size:20px">🌐</span>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:var(--text)">University</div>
+                <div style="font-size:11px;color:var(--muted)">durguniversity.ac.in</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Principal info -->
+      <div style="margin-bottom:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">👨‍💼 Principal</div>
+      <div class="file-item" style="margin-bottom:16px;pointer-events:none">
+        <div class="file-icon" style="background:var(--blue-light)">👨‍💼</div>
+        <div class="file-info">
+          <div class="file-name">Dr. Anil Kumar Kashyap</div>
+          <div class="file-meta">Principal · Administration</div>
+          <div class="file-meta">Swami Atmanand Govt. English Medium Model College</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACULTY: Post Notice -->
+    <div class="section" id="page-f-notices">
+      <div class="page-header">
+        <div class="page-title">📢 Post Notice</div>
+        <div class="page-sub">Post important announcements for students</div>
+      </div>
+      <div class="upload-form">
+        <h3>📢 Notice Details</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Notice Title</label>
+            <input type="text" id="notice-title" placeholder="e.g. Holiday Notice, Fee Submission...">
+          </div>
+          <div class="form-group-inline">
+            <label>Priority</label>
+            <select id="notice-priority">
+              <option value="normal">🔵 Normal</option>
+              <option value="important">🟠 Important</option>
+              <option value="urgent">🔴 Urgent</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>For Department</label>
+            <select id="notice-dept">
+              <option value="All">All Departments</option>
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>For Semester</label>
+            <select id="notice-sem">
+              <option value="All">All Semesters</option>
+              <option value="Sem I">Semester I</option>
+              <option value="Sem II">Semester II</option>
+              <option value="Sem III">Semester III</option>
+              <option value="Sem IV">Semester IV</option>
+              <option value="Sem V">Semester V</option>
+              <option value="Sem VI">Semester VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Notice Content</label>
+          <textarea id="notice-content" rows="5" placeholder="Write the full notice here..."></textarea>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Valid Until (optional)</label>
+          <input type="date" id="notice-expiry">
+        </div>
+        <button class="submit-btn" style="background:#0891b2" onclick="postNotice()">📢 Post Notice</button>
+      </div>
+
+      <!-- Posted notices list for faculty -->
+      <div style="margin-top:24px">
+        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--border)">📋 Posted Notices</div>
+        <div id="facultyNoticesList"><div style="text-align:center;padding:32px;color:var(--text-dim);font-size:13px">No notices posted yet.</div></div>
+      </div>
+    </div>
+
+    <!-- FACULTY: Add Exam Dates -->
+    <div class="section" id="page-f-exams">
+      <div class="page-header">
+        <div class="page-title">📅 Add Exam Date</div>
+        <div class="page-sub">Add upcoming exam schedule for students</div>
+      </div>
+      <div class="upload-form">
+        <h3>📅 Exam Details</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Exam / Test Name</label>
+            <input type="text" id="exam-title" placeholder="e.g. Unit Test 1, Mid Sem Exam...">
+          </div>
+          <div class="form-group-inline">
+            <label>Subject</label>
+            <input type="text" id="exam-subject" placeholder="e.g. C++ Programming">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Exam Date</label>
+            <input type="date" id="exam-date">
+          </div>
+          <div class="form-group-inline">
+            <label>Exam Time</label>
+            <input type="time" id="exam-time">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>For Department</label>
+            <select id="exam-dept">
+              <option value="All">All Departments</option>
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>For Semester</label>
+            <select id="exam-sem">
+              <option value="All">All Semesters</option>
+              <option value="Sem I">Semester I</option>
+              <option value="Sem II">Semester II</option>
+              <option value="Sem III">Semester III</option>
+              <option value="Sem IV">Semester IV</option>
+              <option value="Sem V">Semester V</option>
+              <option value="Sem VI">Semester VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Venue / Room (optional)</label>
+          <input type="text" id="exam-venue" placeholder="e.g. Room 101, Computer Lab">
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Additional Notes (optional)</label>
+          <textarea id="exam-notes" rows="3" placeholder="Syllabus covered, instructions..."></textarea>
+        </div>
+        <button class="submit-btn" style="background:#be185d" onclick="postExam()">📅 Add Exam Date</button>
+      </div>
+
+      <!-- Existing exams list -->
+      <div class="card" style="margin-top:16px">
+        <div class="card-header"><div class="card-title">📋 Exams Added by You</div></div>
+        <div class="card-body" id="f-exams-list"><div class="no-data">No exam dates added yet</div></div>
+      </div>
+    </div>
+
+    <!-- FACULTY: Dashboard -->
+    <div class="section" id="page-f-dashboard">
+      <div class="page-header">
+        <div class="page-title" id="fDashGreet">Faculty Dashboard 👨‍🏫</div>
+        <div class="page-sub" id="fDashSub">Manage your content</div>
+      </div>
+      <div class="grid-3">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--blue-light)">📁</div>
+          <div>
+            <div class="stat-val" id="f-stat-notes">0</div>
+            <div class="stat-label">Notes Uploaded</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--orange-light)">📝</div>
+          <div>
+            <div class="stat-val" id="f-stat-assign">0</div>
+            <div class="stat-label">Assignments Posted</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--purple-light)">📋</div>
+          <div>
+            <div class="stat-val" id="f-stat-syllabus">0</div>
+            <div class="stat-label">Syllabi Uploaded</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Quick Actions</div></div>
+        <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="submit-btn" onclick="showPage('f-upload-notes')">📤 Upload Notes</button>
+          <button class="submit-btn" style="background:var(--orange)" onclick="showPage('f-assignments')">📝 Post Assignment</button>
+          <button class="submit-btn" style="background:var(--purple)" onclick="showPage('f-upload-syllabus')">📋 Upload Syllabus</button>
+          <button class="submit-btn" style="background:var(--green)" onclick="showPage('f-my-uploads')">📂 View My Uploads</button>
+          <button class="submit-btn" style="background:#0891b2" onclick="showPage('f-notices')">📢 Post Notice</button>
+          <button class="submit-btn" style="background:#be185d" onclick="showPage('f-exams')">📅 Add Exam Date</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACULTY: Upload Notes -->
+    <div class="section" id="page-f-upload-notes">
+      <div class="page-header">
+        <div class="page-title">📤 Upload Notes</div>
+        <div class="page-sub">Share study material with students</div>
+      </div>
+      <div class="upload-form">
+        <h3>📄 Note Details</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Title</label>
+            <input type="text" id="note-title" placeholder="e.g. Unit 1 - Introduction to C++">
+          </div>
+          <div class="form-group-inline">
+            <label>Subject</label>
+            <input type="text" id="note-subject" placeholder="e.g. C++ Programming">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>For Department</label>
+            <select id="note-dept">
+              <option value="All">All Departments</option>
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>For Semester</label>
+            <select id="note-sem">
+              <option value="All">All Semesters</option>
+              <option value="Sem I">Semester I</option>
+              <option value="Sem II">Semester II</option>
+              <option value="Sem III">Semester III</option>
+              <option value="Sem IV">Semester IV</option>
+              <option value="Sem V">Semester V</option>
+              <option value="Sem VI">Semester VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Description (optional)</label>
+          <textarea id="note-desc" rows="2" placeholder="Brief description of the notes..."></textarea>
+        </div>
+        <!-- File upload -->
+        <div style="margin-bottom:12px">
+          <label style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px">📎 Attach File (PDF or Image)</label>
+          <div id="note-drop-zone" onclick="document.getElementById('note-file-input').click()" style="border:2px dashed var(--border);border-radius:12px;padding:24px 20px;text-align:center;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--border)'" ondragover="event.preventDefault();this.style.borderColor='var(--blue)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleNoteDrop(event)">
+            <div style="font-size:28px;margin-bottom:6px">📂</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px">Click to browse or drag & drop</div>
+            <div style="font-size:11px;color:var(--text-dim)">PDF, JPG, PNG · Max 25MB</div>
+          </div>
+          <input type="file" id="note-file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleNoteFile(this)">
+          <div id="note-file-preview" style="display:none;margin-top:10px;padding:10px 14px;background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.2);border-radius:10px;align-items:center;gap:10px">
+            <div id="note-file-icon" style="font-size:24px">📄</div>
+            <div style="flex:1"><div id="note-file-name-display" style="font-size:13px;font-weight:600;color:var(--text)"></div><div id="note-file-size-display" style="font-size:11px;color:var(--text-dim);margin-top:2px"></div></div>
+            <button onclick="clearNoteFile()" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;font-weight:600">✕</button>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Or paste Google Drive / PDF link</label>
+          <input type="text" id="note-link" placeholder="https://drive.google.com/...">
+        </div>
+        <button class="submit-btn" onclick="uploadNote()">📤 Upload Note</button>
+      </div>
+    </div>
+
+    <!-- FACULTY: Upload Syllabus -->
+    <div class="section" id="page-f-upload-syllabus">
+      <div class="page-header">
+        <div class="page-title">📋 Upload Syllabus</div>
+        <div class="page-sub">Add syllabus topics for students</div>
+      </div>
+      <div class="upload-form">
+        <h3>📋 Syllabus Details</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Subject Name</label>
+            <input type="text" id="syl-subject" placeholder="e.g. Data Structures">
+          </div>
+          <div class="form-group-inline">
+            <label>Subject Code</label>
+            <input type="text" id="syl-code" placeholder="e.g. BCA-204">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>For Department</label>
+            <select id="syl-dept">
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>For Semester</label>
+            <select id="syl-sem">
+              <option value="Sem I">Semester I</option>
+              <option value="Sem II">Semester II</option>
+              <option value="Sem III">Semester III</option>
+              <option value="Sem IV">Semester IV</option>
+              <option value="Sem V">Semester V</option>
+              <option value="Sem VI">Semester VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Topics (one per line)</label>
+          <textarea id="syl-topics" rows="4" placeholder="Introduction to Data Structures&#10;Arrays and Linked Lists&#10;Stacks and Queues&#10;Trees and Graphs"></textarea>
+        </div>
+
+        <!-- FILE UPLOAD SECTION -->
+        <div style="margin-bottom:16px">
+          <label style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px">📎 Attach File (PDF or Image) — Optional</label>
+          <div id="syl-drop-zone" onclick="document.getElementById('syl-file-input').click()" style="border:2px dashed var(--border);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.2s;background:rgba(255,255,255,0.02)" onmouseover="this.style.borderColor='var(--purple)';this.style.background='rgba(139,92,246,0.05)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='rgba(255,255,255,0.02)'" ondragover="event.preventDefault();this.style.borderColor='var(--purple)';this.style.background='rgba(139,92,246,0.08)'" ondragleave="this.style.borderColor='var(--border)';this.style.background='rgba(255,255,255,0.02)'" ondrop="handleSylDrop(event)">
+            <div style="font-size:32px;margin-bottom:8px">📂</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Click to browse or drag & drop</div>
+            <div style="font-size:12px;color:var(--text-dim)">Supports PDF, JPG, PNG, JPEG · Max 25MB</div>
+          </div>
+          <input type="file" id="syl-file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleSylFile(this)">
+          <!-- File preview -->
+          <div id="syl-file-preview" style="display:none;margin-top:12px;padding:12px 14px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:10px;display:none;align-items:center;gap:12px">
+            <div id="syl-file-icon" style="font-size:28px">📄</div>
+            <div style="flex:1">
+              <div id="syl-file-name" style="font-size:13px;font-weight:600;color:var(--text)"></div>
+              <div id="syl-file-size" style="font-size:11px;color:var(--text-dim);margin-top:2px"></div>
+            </div>
+            <button onclick="clearSylFile()" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;font-weight:600">✕ Remove</button>
+          </div>
+        </div>
+
+        <button class="submit-btn" style="background:var(--purple)" onclick="uploadSyllabus()">📋 Upload Syllabus</button>
+      </div>
+
+      <!-- Uploaded syllabi list -->
+      <div style="margin-top:24px">
+        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--border)">📚 Uploaded Syllabi</div>
+        <div id="facultySyllabusList"><div style="text-align:center;padding:32px;color:var(--text-dim);font-size:13px">No syllabus uploaded yet.</div></div>
+      </div>
+    </div>
+
+    <!-- FACULTY: Post Assignment -->
+    <div class="section" id="page-f-assignments">
+      <div class="page-header">
+        <div class="page-title">📝 Post Assignment</div>
+        <div class="page-sub">Give assignments to students</div>
+      </div>
+      <div class="upload-form">
+        <h3>📝 Assignment Details</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Assignment Title</label>
+            <input type="text" id="assign-title" placeholder="e.g. Write a C++ program for...">
+          </div>
+          <div class="form-group-inline">
+            <label>Subject</label>
+            <input type="text" id="assign-subject" placeholder="e.g. C++ Programming">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>For Department</label>
+            <select id="assign-dept">
+              <option value="All">All Departments</option>
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>For Semester</label>
+            <select id="assign-sem">
+              <option value="All">All Semesters</option>
+              <option value="Sem I">Semester I</option>
+              <option value="Sem II">Semester II</option>
+              <option value="Sem III">Semester III</option>
+              <option value="Sem IV">Semester IV</option>
+              <option value="Sem V">Semester V</option>
+              <option value="Sem VI">Semester VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Assignment Description</label>
+          <textarea id="assign-desc" rows="4" placeholder="Describe what students need to do..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Due Date</label>
+            <input type="date" id="assign-due">
+          </div>
+          <div class="form-group-inline">
+            <label>Marks</label>
+            <input type="number" id="assign-marks" placeholder="e.g. 10">
+          </div>
+        </div>
+        <button class="submit-btn" style="background:var(--orange)" onclick="postAssignment()">📝 Post Assignment</button>
+      </div>
+    </div>
+
+    <!-- FACULTY: Timetable Management -->
+    <div class="section" id="page-f-timetable">
+      <div class="page-header">
+        <div class="page-title">📅 Manage Timetable</div>
+        <div class="page-sub">Delete class entries. Changes reflect instantly for students.</div>
+      </div>
+      <div style="background:rgba(240,192,96,0.08);border:1px solid rgba(240,192,96,0.25);
+                  border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--text-dim)">
+        ℹ️ <strong style="color:var(--text)">How it works:</strong>
+        The default timetable is built-in. When you delete a class for the first time,
+        the system imports that dept's timetable to the database — giving you full control
+        over all entries going forward.
+      </div>
+      <div id="f-timetable-list">
+        <div style="text-align:center;padding:40px;color:var(--text-dim);font-size:13px">Loading...</div>
+      </div>
+    </div>
+
+    <!-- FACULTY: My Uploads -->
+    <div class="section" id="page-f-my-uploads">
+      <div class="page-header">
+        <div class="page-title">📂 My Uploads</div>
+        <div class="page-sub">Everything you've uploaded</div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-header"><div class="card-title">📁 Notes Uploaded</div></div>
+        <div class="card-body" id="f-notes-list"><div class="no-data">No notes uploaded yet</div></div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-header"><div class="card-title">📝 Assignments Posted</div></div>
+        <div class="card-body" id="f-assign-list"><div class="no-data">No assignments posted yet</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📋 Syllabi Uploaded</div></div>
+        <div class="card-body" id="f-syllabus-list"><div class="no-data">No syllabus uploaded yet</div></div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+
+  <!-- Mobile Nav (student) -->
+  <div class="mob-nav" id="mobNavStudent">
+    <div class="mob-nav-inner">
+      <button class="mob-nav-item active" onclick="showPage('dashboard',true)"><span class="mob-icon">🏠</span>Home</button>
+      <button class="mob-nav-item" onclick="showPage('classes',true)"><span class="mob-icon">📅</span>Classes</button>
+      <button class="mob-nav-item" onclick="showPage('notes',true)"><span class="mob-icon">📁</span>Notes</button>
+      <button class="mob-nav-item" onclick="showPage('syllabus',true)"><span class="mob-icon">📋</span>Syllabus</button>
+      <button class="mob-nav-item" onclick="showPage('assignments',true)"><span class="mob-icon">📝</span>Tasks</button>
+      <button class="mob-nav-item" onclick="showPage('notices',true)"><span class="mob-icon">📢</span>Notices</button>
+      <button class="mob-nav-item" onclick="showPage('exams',true)"><span class="mob-icon">📅</span>Exams</button>
+      <button class="mob-nav-item" onclick="showPage('links',true)"><span class="mob-icon">🔗</span>Links</button>
+      <button class="mob-nav-item" onclick="logout()" style="color:#dc2626"><span class="mob-icon">🚪</span>Logout</button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav (faculty) -->
+  <div class="mob-nav" id="mobNavFaculty" style="display:none">
+    <div class="mob-nav-inner">
+      <button class="mob-nav-item active" onclick="showPage('f-dashboard',true)"><span class="mob-icon">🏠</span>Home</button>
+      <button class="mob-nav-item" onclick="showPage('f-upload-notes',true)"><span class="mob-icon">📤</span>Notes</button>
+      <button class="mob-nav-item" onclick="showPage('f-assignments',true)"><span class="mob-icon">📝</span>Assign</button>
+      <button class="mob-nav-item" onclick="showPage('f-upload-syllabus',true)"><span class="mob-icon">📋</span>Syllabus</button>
+      <button class="mob-nav-item" onclick="showPage('f-my-uploads',true)"><span class="mob-icon">📂</span>My Files</button>
+      <button class="mob-nav-item" onclick="showPage('f-notices',true)"><span class="mob-icon">📢</span>Notice</button>
+      <button class="mob-nav-item" onclick="showPage('f-exams',true)"><span class="mob-icon">📅</span>Exams</button>
+      <button class="mob-nav-item" onclick="showPage('f-timetable',true)"><span class="mob-icon">🗓️</span>Timetable</button>
+      <button class="mob-nav-item" onclick="logout()" style="color:#dc2626"><span class="mob-icon">🚪</span>Logout</button>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- Toast -->
+<div class="toast" id="toast">✅ Done!</div>
+
+<script>
+// ═══ DATA STORE (localStorage) ═══
+let currentUser = null;
+let currentRole = 'student';
+
+const TIMETABLE = {
+  'BCA': {
+    'Sem I':  [{time:'10:30–11:30', sub:'Introduction to Computers', teacher:'Mr. Gulam Mustafa Ansari'},{time:'11:30–12:30', sub:'Mathematics', teacher:'Faculty'},{time:'12:30–1:30', sub:'Communication Skills', teacher:'Dr. Radhika Sarkar'},{time:'2:00–3:00', sub:'Digital Electronics', teacher:'Mr. Kashyap Rathor'},{time:'3:00–4:00', sub:'Practical', teacher:'Faculty'}],
+    'Sem II': [{time:'10:30–11:30', sub:'C++ Programming', teacher:'Mr. Gulam Mustafa Ansari'},{time:'11:30–12:30', sub:'Digital Electronics', teacher:'Mr. Kashyap Rathor'},{time:'12:30–1:30', sub:'Data Structures', teacher:'Mr. Gulam Mustafa Ansari'},{time:'2:00–3:00', sub:'Mathematics', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical Lab', teacher:'Faculty'}],
+    'Sem III':[{time:'10:30–11:30', sub:'Database Management', teacher:'Mr. Gulam Mustafa Ansari'},{time:'11:30–12:30', sub:'Operating Systems', teacher:'Mr. Kashyap Rathor'},{time:'12:30–1:30', sub:'Computer Networks', teacher:'Faculty'},{time:'2:00–3:00', sub:'Web Technologies', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical', teacher:'Faculty'}],
+    'Sem IV': [{time:'10:30–11:30', sub:'Theory of Computation', teacher:'Mr. Gulam Mustafa Ansari'},{time:'11:30–12:30', sub:'Artificial Intelligence', teacher:'Mr. Kashyap Rathor'},{time:'12:30–1:30', sub:'Web Technologies', teacher:'Faculty'},{time:'2:00–3:00', sub:'Python Programming', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical Lab', teacher:'Faculty'}],
+    'Sem V':  [{time:'10:30–11:30', sub:'Software Engineering', teacher:'Mr. Gulam Mustafa Ansari'},{time:'11:30–12:30', sub:'Mobile Computing', teacher:'Faculty'},{time:'12:30–1:30', sub:'Machine Learning', teacher:'Faculty'},{time:'3:00–4:00', sub:'Project Work', teacher:'Faculty'}],
+    'Sem VI': [{time:'10:30–11:30', sub:'Cloud Computing', teacher:'Faculty'},{time:'11:30–12:30', sub:'Information Security', teacher:'Faculty'},{time:'2:00–4:00', sub:'Final Project', teacher:'Mr. Gulam Mustafa Ansari'}],
+  },
+  'BSC CS': {
+    'Sem I':  [{time:'10:30–11:30', sub:'Mathematics I', teacher:'Faculty'},{time:'11:30–12:30', sub:'Physics', teacher:'Ms. Neekita Shah'},{time:'12:30–1:30', sub:'Introduction to Programming', teacher:'Mr. Kashyap Rathor'},{time:'3:00–4:00', sub:'Lab', teacher:'Faculty'}],
+    'Sem II': [{time:'10:30–11:30', sub:'C++ Programming', teacher:'Mr. Kashyap Rathor'},{time:'11:30–12:30', sub:'Physics', teacher:'Ms. Neekita Shah'},{time:'12:30–1:30', sub:'Mathematics II', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical', teacher:'Faculty'}],
+    'Sem III':[{time:'10:30–11:30', sub:'Data Structures', teacher:'Mr. Kashyap Rathor'},{time:'11:30–12:30', sub:'Discrete Mathematics', teacher:'Faculty'},{time:'12:30–1:30', sub:'Computer Architecture', teacher:'Faculty'},{time:'3:00–4:00', sub:'Lab', teacher:'Faculty'}],
+    'Sem IV': [{time:'10:30–11:30', sub:'Mathematics', teacher:'Faculty'},{time:'11:30–12:30', sub:'RDBMS', teacher:'Mr. Kashyap Rathor'},{time:'12:30–1:30', sub:'Physics', teacher:'Ms. Neekita Shah'},{time:'2:00–3:00', sub:'Computer System Architecture', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical', teacher:'Faculty'}],
+  },
+  'BSC BIO': {
+    'Sem I':  [{time:'10:30–11:30', sub:'Botany', teacher:'Mr. Kashyap Rathor'},{time:'11:30–12:30', sub:'Zoology', teacher:'Faculty'},{time:'12:30–1:30', sub:'Chemistry', teacher:'Mrs. Triveni Sahu'},{time:'3:00–4:00', sub:'Lab', teacher:'Faculty'}],
+    'Sem II': [{time:'10:30–11:30', sub:'Chemistry', teacher:'Mrs. Triveni Sahu'},{time:'11:30–12:30', sub:'Botany', teacher:'Mr. Kashyap Rathor'},{time:'12:30–1:30', sub:'Zoology', teacher:'Faculty'},{time:'3:00–4:00', sub:'Practical Lab', teacher:'Faculty'}],
+    'Sem III':[{time:'10:30–11:30', sub:'Ecology', teacher:'Mr. Kashyap Rathor'},{time:'11:30–12:30', sub:'Organic Chemistry', teacher:'Mrs. Triveni Sahu'},{time:'12:30–1:30', sub:'Genetics', teacher:'Faculty'},{time:'3:00–4:00', sub:'Lab', teacher:'Faculty'}],
+    'Sem IV': [{time:'10:30–11:30', sub:'Botany Lab', teacher:'Mr. Kashyap Rathor'},{time:'11:30–12:30', sub:'Zoology Lab', teacher:'Faculty'},{time:'12:30–1:30', sub:'Chemistry Lab', teacher:'Mrs. Triveni Sahu'},{time:'3:00–4:00', sub:'Practical', teacher:'Faculty'}],
+  },
+  'BCOM': {
+    'Sem I':  [{time:'10:30–11:30', sub:'Business Organisation', teacher:'Shailendra Sahu'},{time:'11:30–12:30', sub:'Financial Accounting', teacher:'Palash Thakur'},{time:'12:30–1:30', sub:'Business Mathematics', teacher:'Faculty'},{time:'3:00–4:00', sub:'Tutorial', teacher:'Faculty'}],
+    'Sem II': [{time:'10:30–11:30', sub:'Business Environment', teacher:'Shailendra Sahu'},{time:'11:30–12:30', sub:'Accounting', teacher:'Palash Thakur'},{time:'12:30–1:30', sub:'Mathematics', teacher:'Faculty'},{time:'3:00–4:00', sub:'Tutorial', teacher:'Faculty'}],
+    'Sem III':[{time:'10:30–11:30', sub:'Corporate Accounting', teacher:'Palash Thakur'},{time:'11:30–12:30', sub:'Business Law', teacher:'Shailendra Sahu'},{time:'12:30–1:30', sub:'Economics', teacher:'Faculty'},{time:'3:00–4:00', sub:'Tutorial', teacher:'Faculty'}],
+    'Sem IV': [{time:'10:30–11:30', sub:'Business Statistics', teacher:'Faculty'},{time:'11:30–12:30', sub:'Cost Accounting', teacher:'Palash Thakur'},{time:'12:30–1:30', sub:'Entrepreneurship', teacher:'Shailendra Sahu'},{time:'3:00–4:00', sub:'Tutorial', teacher:'Faculty'}],
+  }
+};
+
+window._cache = { notes:[], assignments:[], syllabi:[], notices:[], exams:[], timetable:[], student_notes:[], student_syllabi:[] };
+window._fbListeners = [];
+
+function getStorage(key) { return window._cache[key] || []; }
+function setStorage(key, val) { window._cache[key] = val; }
+
+async function fbAdd(col, data) {
+  if (window.FB_READY) {
+    try { await window.FB.addItem(col, data); showToast('✅ Saved!'); return; } catch(e) { console.error('Firebase error:',e); }
+  }
+  const arr = window._cache[col] || [];
+  arr.unshift({...data});
+  window._cache[col] = arr;
+}
+
+async function fbDelete(col, id) {
+  if (window.FB_READY) {
+    try { await window.FB.deleteItem(col, id); showToast("🗑️ Deleted!"); return; } catch(e) { console.error("Firebase delete error:", e); }
+  }
+  window._cache[col] = (window._cache[col] || []).filter(item => item.id !== id);
+  showToast("🗑️ Deleted!");
+  renderNotices();
+}
+
+function startListeners() {
+  window._fbListeners.forEach(u => u && u());
+  window._fbListeners = [];
+  if (!window.FB_READY) return;
+  ['notes','assignments','syllabi','notices','exams','timetable','student_notes','student_syllabi'].forEach(col => {
+    const unsub = window.FB.listen(col, data => {
+      window._cache[col] = data;
+      try {
+        const pg = document.querySelector('.section.active');
+        if (!pg) return;
+        const id = pg.id.replace('page-','');
+        if (id==='notes') { renderNotes(); renderStudentNotes(); }
+        if (id==='assignments') renderAssignments();
+        if (id==='notices') renderNotices();
+        if (id==='f-notices') renderFacultyNotices();
+        if (id==='f-upload-syllabus') renderFacultySyllabusList();
+        if (id==='f-timetable') renderFacultyTimetable();
+        if (id==='exams') renderExams();
+        if (id==='syllabus') { renderSyllabus(); renderStudentSyllabus(); }
+        if (id==='dashboard') renderStudentData();
+      } catch(e) {}
+    });
+    window._fbListeners.push(unsub);
+  });
+}
+
+// ═══ AUTH ═══
+function switchRole(role) {
+  currentRole = role;
+  document.querySelectorAll('.role-tab').forEach((t,i) =>
+    t.classList.toggle('active', (i===0 && role==='student') || (i===1 && role==='faculty'))
+  );
+  document.getElementById('studentAuth').style.display = role === 'student' ? '' : 'none';
+  document.getElementById('facultyAuth').style.display = role === 'faculty' ? '' : 'none';
+  // Always show login view when switching roles
+  showStudentLogin();
+  showFacultyLogin();
+}
+
+// OTP helpers
+// OTP helpers removed — using email/password auth now.
+
+// ════════════════════════════════════════════════════════════
+// EMAIL / PASSWORD AUTH — Firebase Auth
+//
+// Flow:
+//   LOGIN:    signInWithEmailAndPassword → load profile from Firestore
+//   REGISTER: createUserWithEmailAndPassword → save profile → enter app
+//   RESET:    sendPasswordResetEmail → Firebase emails reset link
+//
+// WHY email over phone:
+//   - No SMS quota limits
+//   - No reCAPTCHA required
+//   - Works on all browsers and devices
+//   - Password reset is built into Firebase for free
+// ════════════════════════════════════════════════════════════
+
+const FACULTY_SECRET = 'SAGEMS@Faculty2025';
+
+// ── UI helpers ──
+
+function togglePass(inputId) {
+  const el = document.getElementById(inputId);
+  el.type = el.type === 'password' ? 'text' : 'password';
+}
+
+function showStudentLogin() {
+  document.getElementById('s-login-view').style.display    = '';
+  document.getElementById('s-register-view').style.display = 'none';
+}
+
+function showStudentRegister() {
+  document.getElementById('s-login-view').style.display    = 'none';
+  document.getElementById('s-register-view').style.display = '';
+}
+
+function showFacultyLogin() {
+  document.getElementById('f-login-view').style.display    = '';
+  document.getElementById('f-register-view').style.display = 'none';
+}
+
+function showFacultyRegister() {
+  document.getElementById('f-login-view').style.display    = 'none';
+  document.getElementById('f-register-view').style.display = '';
+}
+
+// ── Shared: set button loading state ──
+function setBtnLoading(btnId, loading, defaultText) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled    = loading;
+  btn.textContent = loading ? 'Please wait...' : defaultText;
+}
+
+// ── Shared: user-friendly Firebase error messages ──
+function firebaseErrMsg(code) {
+  const map = {
+    'auth/user-not-found'       : 'No account found with this email.',
+    'auth/wrong-password'       : 'Incorrect password. Try again.',
+    'auth/invalid-credential'   : 'Incorrect email or password.',
+    'auth/email-already-in-use' : 'An account with this email already exists.',
+    'auth/weak-password'        : 'Password must be at least 6 characters.',
+    'auth/invalid-email'        : 'Please enter a valid email address.',
+    'auth/too-many-requests'    : 'Too many attempts. Try again in a few minutes.',
+    'auth/network-request-failed': 'Network error. Check your connection.',
+  };
+  return map[code] || 'Something went wrong. Please try again.';
+}
+
+// ── Forgot password ──
+async function forgotPassword(role) {
+  const emailId = role === 'student' ? 's-email' : 'f-email';
+  const email   = document.getElementById(emailId)?.value.trim();
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast('⚠️ Enter your email in the field above first.');
+    return;
+  }
+
+  try {
+    await auth.sendPasswordResetEmail(email);
+    showToast('📧 Password reset link sent to ' + email);
+  } catch (err) {
+    showToast('❌ ' + firebaseErrMsg(err.code));
+  }
+}
+
+// ════════ STUDENT LOGIN ════════
+
+async function sLogin() {
+  const email    = document.getElementById('s-email').value.trim();
+  const password = document.getElementById('s-password').value;
+
+  // Clear previous errors
+  document.getElementById('s-email-err').style.display = 'none';
+  document.getElementById('s-pass-err').style.display  = 'none';
+
+  // Validate inputs before hitting Firebase
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('s-email-err').textContent  = 'Enter a valid email address.';
+    document.getElementById('s-email-err').style.display = 'block';
+    return;
+  }
+  if (!password) {
+    document.getElementById('s-pass-err').textContent  = 'Enter your password.';
+    document.getElementById('s-pass-err').style.display = 'block';
+    return;
+  }
+
+  setBtnLoading('s-login-btn', true, 'Login →');
+
+  try {
+    const cred    = await auth.signInWithEmailAndPassword(email, password);
+    const uid     = cred.user.uid;
+
+    // Load profile from Firestore
+    let profile = null;
+    if (window.FB_READY) {
+      profile = await window.FB.getUser('student', uid);
+    }
+
+    // Fallback to localStorage if offline or Firebase not ready
+    if (!profile) {
+      const local = localStorage.getItem('student_' + uid);
+      profile = local ? JSON.parse(local) : null;
+    }
+
+    if (!profile) {
+      // Account exists in Firebase Auth but no Firestore profile yet
+      // This can happen if registration was interrupted — go to register
+      showToast('⚠️ Please complete your profile.');
+      showStudentRegister();
+      document.getElementById('s-reg-email').value = email;
+      return;
+    }
+
+    currentUser = profile;
+    enterApp();
+
+  } catch (err) {
+    console.error('Student login error:', err);
+    document.getElementById('s-pass-err').textContent  = firebaseErrMsg(err.code);
+    document.getElementById('s-pass-err').style.display = 'block';
+  } finally {
+    setBtnLoading('s-login-btn', false, 'Login →');
+  }
+}
+
+// ════════ STUDENT REGISTER ════════
+
+async function sRegister() {
+  const name     = document.getElementById('s-reg-name').value.trim();
+  const email    = document.getElementById('s-reg-email').value.trim();
+  const password = document.getElementById('s-reg-password').value;
+  const dept     = document.getElementById('s-reg-dept').value;
+  const sem      = document.getElementById('s-reg-sem').value;
+
+  // Clear errors
+  ['s-reg-name-err','s-reg-email-err','s-reg-pass-err','s-reg-dept-err','s-reg-sem-err']
+    .forEach(id => document.getElementById(id).style.display = 'none');
+
+  // Validate all fields
+  let valid = true;
+  if (!name)  { document.getElementById('s-reg-name-err').style.display = 'block'; valid = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('s-reg-email-err').textContent  = 'Enter a valid email address.';
+    document.getElementById('s-reg-email-err').style.display = 'block';
+    valid = false;
+  }
+  if (password.length < 6) {
+    document.getElementById('s-reg-pass-err').textContent  = 'Password must be at least 6 characters.';
+    document.getElementById('s-reg-pass-err').style.display = 'block';
+    valid = false;
+  }
+  if (!dept) { document.getElementById('s-reg-dept-err').style.display = 'block'; valid = false; }
+  if (!sem)  { document.getElementById('s-reg-sem-err').style.display  = 'block'; valid = false; }
+  if (!valid) return;
+
+  setBtnLoading('s-register-btn', true, 'Create Account & Enter →');
+
+  try {
+    // Create Firebase Auth account
+    const cred = await auth.createUserWithEmailAndPassword(email, password);
+    const uid  = cred.user.uid;
+
+    currentUser = {
+      name,
+      email,
+      dept,
+      sem,
+      uid,
+      role    : 'student',
+      initials: name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+    };
+
+    // Save profile to Firestore (keyed by uid for security)
+    if (window.FB_READY) await window.FB.saveUser('student', uid, currentUser);
+    localStorage.setItem('student_' + uid, JSON.stringify(currentUser));
+
+    enterApp();
+
+  } catch (err) {
+    console.error('Student register error:', err);
+    document.getElementById('s-reg-email-err').textContent  = firebaseErrMsg(err.code);
+    document.getElementById('s-reg-email-err').style.display = 'block';
+  } finally {
+    setBtnLoading('s-register-btn', false, 'Create Account & Enter →');
+  }
+}
+
+// ════════ FACULTY LOGIN ════════
+
+async function fLogin() {
+  const email    = document.getElementById('f-email').value.trim();
+  const password = document.getElementById('f-password').value;
+
+  document.getElementById('f-email-err').style.display = 'none';
+  document.getElementById('f-pass-err').style.display  = 'none';
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('f-email-err').textContent  = 'Enter a valid email address.';
+    document.getElementById('f-email-err').style.display = 'block';
+    return;
+  }
+  if (!password) {
+    document.getElementById('f-pass-err').textContent  = 'Enter your password.';
+    document.getElementById('f-pass-err').style.display = 'block';
+    return;
+  }
+
+  setBtnLoading('f-login-btn', true, 'Login →');
+
+  try {
+    const cred = await auth.signInWithEmailAndPassword(email, password);
+    const uid  = cred.user.uid;
+
+    let profile = null;
+    if (window.FB_READY) profile = await window.FB.getUser('faculty', uid);
+    if (!profile) {
+      const local = localStorage.getItem('faculty_' + uid);
+      profile = local ? JSON.parse(local) : null;
+    }
+
+    if (!profile) {
+      showToast('⚠️ Please complete your faculty profile.');
+      showFacultyRegister();
+      document.getElementById('f-reg-email').value = email;
+      return;
+    }
+
+    currentUser = profile;
+    enterApp();
+
+  } catch (err) {
+    console.error('Faculty login error:', err);
+    document.getElementById('f-pass-err').textContent  = firebaseErrMsg(err.code);
+    document.getElementById('f-pass-err').style.display = 'block';
+  } finally {
+    setBtnLoading('f-login-btn', false, 'Login →');
+  }
+}
+
+// ════════ FACULTY REGISTER ════════
+
+async function fRegister() {
+  const name     = document.getElementById('f-reg-name').value.trim();
+  const email    = document.getElementById('f-reg-email').value.trim();
+  const password = document.getElementById('f-reg-password').value;
+  const dept     = document.getElementById('f-reg-dept').value;
+  const code     = document.getElementById('f-reg-code').value.trim();
+
+  ['f-reg-name-err','f-reg-email-err','f-reg-pass-err','f-reg-dept-err','f-reg-code-err']
+    .forEach(id => document.getElementById(id).style.display = 'none');
+
+  let valid = true;
+  if (!name) { document.getElementById('f-reg-name-err').style.display = 'block'; valid = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('f-reg-email-err').textContent  = 'Enter a valid email address.';
+    document.getElementById('f-reg-email-err').style.display = 'block';
+    valid = false;
+  }
+  if (password.length < 6) {
+    document.getElementById('f-reg-pass-err').textContent  = 'Password must be at least 6 characters.';
+    document.getElementById('f-reg-pass-err').style.display = 'block';
+    valid = false;
+  }
+  if (!dept) { document.getElementById('f-reg-dept-err').style.display = 'block'; valid = false; }
+
+  // Faculty secret check — must match before creating account
+  if (code !== FACULTY_SECRET) {
+    document.getElementById('f-reg-code-err').textContent  = '❌ Wrong faculty code. Contact your Principal.';
+    document.getElementById('f-reg-code-err').style.display = 'block';
+    document.getElementById('f-reg-code').value = '';
+    valid = false;
+  }
+  if (!valid) return;
+
+  setBtnLoading('f-register-btn', true, 'Create Faculty Account →');
+
+  try {
+    const cred = await auth.createUserWithEmailAndPassword(email, password);
+    const uid  = cred.user.uid;
+
+    currentUser = {
+      name,
+      email,
+      dept,
+      uid,
+      role    : 'faculty',
+      initials: name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+    };
+
+    if (window.FB_READY) await window.FB.saveUser('faculty', uid, currentUser);
+    localStorage.setItem('faculty_' + uid, JSON.stringify(currentUser));
+
+    enterApp();
+
+  } catch (err) {
+    console.error('Faculty register error:', err);
+    document.getElementById('f-reg-email-err').textContent  = firebaseErrMsg(err.code);
+    document.getElementById('f-reg-email-err').style.display = 'block';
+  } finally {
+    setBtnLoading('f-register-btn', false, 'Create Faculty Account →');
+  }
+}
+
+function enterApp() {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appShell').style.display = 'block';
+
+  const isFaculty = currentUser.role === 'faculty';
+
+  // Sidebar
+  document.getElementById('sidebarAvatar').textContent = currentUser.initials;
+  document.getElementById('sidebarAvatar').className = 'user-avatar ' + (isFaculty ? 'avatar-faculty' : 'avatar-student');
+  document.getElementById('sidebarName').textContent = currentUser.name;
+  document.getElementById('sidebarRole').textContent = isFaculty
+    ? currentUser.dept + ' · Faculty'
+    : currentUser.dept + ' · ' + currentUser.sem;
+
+  // Set topbar title
+  const topbarTitle = document.getElementById('topbarTitle');
+  if (topbarTitle) topbarTitle.textContent = isFaculty ? currentUser.name + ' 👨‍🏫' : currentUser.name + ' 🎓';
+  document.getElementById('studentNav').style.display = isFaculty ? 'none' : '';
+  document.getElementById('facultyNav').style.display = isFaculty ? '' : 'none';
+  document.getElementById('mobNavStudent').style.display = isFaculty ? 'none' : '';
+  document.getElementById('mobNavFaculty').style.display = isFaculty ? '' : 'none';
+
+  if (isFaculty) {
+    showPage('f-dashboard');
+    document.getElementById('fDashGreet').textContent = 'Welcome, ' + currentUser.name + ' 👨‍🏫';
+    document.getElementById('fDashSub').textContent = currentUser.dept + ' Department';
+    updateFacultyStats();
+  } else {
+    showPage('dashboard');
+    const hour = new Date().getHours();
+    const g = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+    document.getElementById('dashGreet').textContent = g + ', ' + currentUser.name.split(' ')[0] + ' 👋';
+    document.getElementById('dashSub').textContent = currentUser.dept + ' · ' + currentUser.sem;
+    document.getElementById('classSub').textContent = currentUser.dept + ' · ' + currentUser.sem;
+    document.getElementById('syllabusSub').textContent = currentUser.dept + ' · ' + currentUser.sem;
+    renderStudentData();
+  }
+  startListeners();
+  // Show iOS install tip after login
+  if (typeof showIOSInstallTip === 'function') showIOSInstallTip();
+}
+
+function logout() {
+  currentUser = null;
+  document.getElementById('authScreen').style.display = '';
+  document.getElementById('appShell').style.display = 'none';
+  switchRole('student');
+}
+
+// ═══ NAVIGATION ═══
+function showPage(id, mobile=false) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+
+  const prefix = currentUser?.role === 'faculty' ? 'f-' : '';
+  const activeId = id.startsWith('f-') ? id : id;
+
+  // Sidebar nav
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    const onclick = n.getAttribute('onclick') || '';
+    if (onclick.includes("'"+id+"'")) n.classList.add('active');
+  });
+
+  // Mobile nav
+  const mobItems = document.querySelectorAll('.mob-nav-item');
+  mobItems.forEach(n => {
+    n.classList.remove('active');
+    const onclick = n.getAttribute('onclick') || '';
+    if (onclick.includes("'"+id+"'")) n.classList.add('active');
+  });
+
+  if (mobile) closeSidebar();
+
+  // Render on demand
+  if (id === 'notes') { renderNotes(); renderStudentNotes(); }
+  if (id === 'syllabus') { renderSyllabus(); renderStudentSyllabus(); }
+  if (id === 'assignments') renderAssignments();
+  if (id === 'notices') renderNotices();
+  if (id === 'f-notices') renderFacultyNotices();
+  if (id === 'f-upload-syllabus') renderFacultySyllabusList();
+  if (id === 'exams') renderExams();
+  if (id === 'f-my-uploads') renderFacultyUploads();
+  if (id === 'f-timetable') renderFacultyTimetable();
+  if (id === 'f-exams') renderFacultyExams();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ═══ STUDENT: RENDER TIMETABLE ═══
+function getTodayClasses() {
+  if (!currentUser) return [];
+  const dept = currentUser.dept;
+  const sem = currentUser.sem;
+  const deptData = TIMETABLE[dept];
+  if (!deptData) return [];
+  return deptData[sem] || [];
+}
+
+function getClassBadge(time) {
+  const now = new Date();
+  const cur = now.getHours() * 60 + now.getMinutes();
+  function toMin(str) {
+    const [h, m] = str.trim().split(':').map(Number);
+    return (h < 7 ? h + 12 : h) * 60 + (m || 0);
+  }
+  const parts = time.split('–');
+  const start = toMin(parts[0]);
+  const end = toMin(parts[1]);
+  if (cur >= start && cur <= end) return '<span class="badge badge-live">🟢 Live</span>';
+  if (cur > end) return '<span class="badge badge-done">✓ Done</span>';
+  return '<span class="badge badge-next">Upcoming</span>';
+}
+
+function renderStudentData() {
+  const classes = getTodayClasses();
+  // Stats
+  const notes = getStorage('notes').filter(n => n.dept === currentUser.dept || n.dept === 'All').filter(n => n.sem === currentUser.sem || n.sem === 'All');
+  const assigns = getStorage('assignments').filter(a => a.dept === currentUser.dept || a.dept === 'All').filter(a => a.sem === currentUser.sem || a.sem === 'All');
+  const notices = getStorage('notices').filter(n => (n.dept==='All'||n.dept===currentUser.dept)&&(n.sem==='All'||n.sem===currentUser.sem));
+  const today2 = new Date(); today2.setHours(0,0,0,0);
+  const upcomingExams = getStorage('exams').filter(e => (e.dept==='All'||e.dept===currentUser.dept)&&(e.sem==='All'||e.sem===currentUser.sem)&&new Date(e.date)>=today2);
+  document.getElementById('stat-classes').textContent = classes.length;
+  document.getElementById('stat-assign').textContent = assigns.length;
+  document.getElementById('stat-notes').textContent = notes.length;
+  if(document.getElementById('stat-notices')) document.getElementById('stat-notices').textContent = notices.length;
+  if(document.getElementById('stat-exams')) document.getElementById('stat-exams').textContent = upcomingExams.length;
+
+  // Dashboard classes
+  const dc = document.getElementById('dashClasses');
+  if (!classes.length) { dc.innerHTML = '<div class="no-data">No classes scheduled</div>'; }
+  else {
+    dc.innerHTML = classes.slice(0,3).map(c => `
+      <div class="class-item">
+        <div class="class-time">${c.time}</div>
+        <div class="class-info">
+          <div class="class-subject">${c.sub}</div>
+          <div class="class-teacher">${c.teacher}</div>
+        </div>
+        ${getClassBadge(c.time)}
+      </div>`).join('');
+  }
+
+  // Dashboard assignments
+  const da = document.getElementById('dashAssignments');
+  if (!assigns.length) { da.innerHTML = '<div class="no-data">No assignments yet</div>'; }
+  else {
+    da.innerHTML = assigns.slice(0,3).map(a => `
+      <div class="assign-item">
+        <div class="assign-header">
+          <div>
+            <div class="assign-title">${a.title}</div>
+            <div class="assign-subject">${a.subject}</div>
+          </div>
+          <span class="chip chip-orange">Due: ${a.due || 'TBD'}</span>
+        </div>
+      </div>`).join('');
+  }
+}
+
+// Full timetable
+function renderClasses() {
+  /*
+   * WHY: We first check if faculty has uploaded a custom timetable
+   * for this dept+sem in Firebase/cache. If yes, use that (allows
+   * faculty to add/delete entries). If no custom data exists,
+   * fall back to the hardcoded TIMETABLE constant so the app
+   * always shows something useful.
+   */
+  const dept = currentUser.dept;
+  const sem  = currentUser.sem;
+
+  // Check for faculty-managed timetable entries in cache
+  const customEntries = getStorage('timetable').filter(
+    t => t.dept === dept && t.sem === sem
+  );
+
+  // Fall back to hardcoded TIMETABLE if no custom entries exist
+  const classes = customEntries.length > 0
+    ? customEntries
+    : (TIMETABLE[dept]?.[sem] || []);
+
+  const cont = document.getElementById('classesContent');
+  if (!classes.length) {
+    cont.innerHTML = '<div class="no-data">No timetable found for your dept & semester</div>';
+    return;
+  }
+
+  cont.innerHTML = classes.map((c, idx) => {
+    /*
+     * Delete button logic:
+     * - If using custom entries (from cache/Firebase), faculty can delete.
+     * - If using hardcoded fallback, faculty must first "import" it,
+     *   which copies it to Firebase so deletions are permanent.
+     */
+    const isCustom = customEntries.length > 0;
+    const deleteBtn = currentRole === 'faculty'
+      ? `<button
+           onclick="${isCustom
+             ? `deleteTimetableEntry('${c.id||''}', ${idx}, '${dept}', '${sem}')`
+             : `importAndDeleteTimetableEntry(${idx}, '${dept}', '${sem}')`
+           }"
+           title="${isCustom ? 'Delete this class permanently' : 'Remove this class (will import timetable first)'}"
+           style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                  border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;
+                  cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+           onmouseover="this.style.background='#dc2626';this.style.color='white'"
+           onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+           🗑
+         </button>`
+      : '';
+
+    return `
+    <div class="class-item" style="display:flex;align-items:center;gap:8px">
+      <div class="class-time">${c.time}</div>
+      <div class="class-info" style="flex:1">
+        <div class="class-subject">${c.sub}</div>
+        <div class="class-teacher">👨‍🏫 ${c.teacher}</div>
+      </div>
+      ${getClassBadge(c.time)}
+      ${deleteBtn}
+    </div>`;
+  }).join('');
+}
+
+// Notes
+function renderNotes() {
+  const all = getStorage('notes');
+  const filtered = all.filter(n =>
+    (n.dept === currentUser.dept || n.dept === 'All') &&
+    (n.sem === currentUser.sem || n.sem === 'All')
+  );
+  const cont = document.getElementById('notesContent');
+  if (!filtered.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px"><div class="e-icon">📭</div><p>No notes uploaded yet for your department & semester.</p></div>';
+    return;
+  }
+  cont.innerHTML = filtered.map(n => {
+    // Determine action: fileData (base64) > link > nothing
+    let actionBtn = '';
+    if (n.fileData) {
+      actionBtn = `<button onclick="viewNoteFile(event, '${n.id||''}')" style="background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0">${n.fileType==='application/pdf' ? '📕 View PDF' : '🖼️ View'}</button>`;
+    } else if (n.link) {
+      actionBtn = `<a href="${n.link}" target="_blank" style="background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;text-decoration:none;flex-shrink:0">Open ↗</a>`;
+    } else {
+      actionBtn = `<span style="font-size:11px;color:var(--muted)">No file</span>`;
+    }
+    return `<div class="file-item" style="display:flex;align-items:center;gap:12px;cursor:default">
+      <div class="file-icon" style="background:var(--blue-light)">📄</div>
+      <div class="file-info" style="flex:1">
+        <div class="file-name">${n.title}</div>
+        <div class="file-meta">${n.subject} · ${n.dept} · ${n.sem} · By ${n.by}</div>
+        ${n.desc ? '<div class="file-meta" style="margin-top:2px">'+n.desc+'</div>' : ''}
+      </div>
+      ${actionBtn}
+    </div>`;
+  }).join('');
+}
+
+function viewNoteFile(e, noteId) {
+  e.preventDefault();
+  // Find note by id or by position in all notes
+  const all = getStorage('notes');
+  const note = all.find(n => n.id === noteId) || all.find(n => n.fileData);
+  if (!note || !note.fileData) return;
+  if (note.fileType === 'application/pdf') {
+    const win = window.open('','_blank');
+    win.document.write('<html><body style="margin:0"><embed src="'+note.fileData+'" width="100%" height="100%" type="application/pdf"></body></html>');
+  } else {
+    const win = window.open('','_blank');
+    win.document.write('<html><body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh"><img src="'+note.fileData+'" style="max-width:100%;max-height:100vh"></body></html>');
+  }
+}
+
+// ═══ BUILT-IN SYLLABUS DATA ═══
+const BUILTIN_SYLLABUS = {
+  'BSC MATHS': {
+    'Sem II': [
+      {
+        subject: 'Algebra', code: 'MASC-02', credits: 4,
+        units: [
+          { unit: 'Unit I', title: 'Matrix Algebra', topics: [
+            'Introduction, elementary operations of matrices',
+            'Inverse of a matrix',
+            'Special types of matrices: Transpose, Symmetric and Skew symmetric matrices',
+            'Hermitian and Skew Hermitian matrix',
+            'Rank of a matrix, Echelon form, Normal form',
+            'Application of matrices to a system of linear equations (homogeneous and non-homogeneous)',
+            'Theorems on consistency of a system of linear equations',
+            'Eigen values and Eigen vectors, relation between them',
+            'Process of finding Eigen values and Eigen vectors',
+            'Cayley Hamilton theorem and its use in finding inverse of a matrix'
+          ]},
+          { unit: 'Unit II', title: 'Sets Theory, Relations & Functions', topics: [
+            'Sets, subsets, Set operations and laws of set theory',
+            'Venn diagrams',
+            'Examples of finite and infinite sets, Finite sets and counting principle',
+            'Empty set, properties of empty set',
+            'Standard set operations, Classes of a set',
+            'Power set, Difference and symmetric difference of two sets',
+            'Set identities, Generalized union and intersection',
+            'Relations & Functions: Product set, Composition of relations',
+            'Types of relations, Partitions, Equivalence Relations',
+            'Congruence modulo relation, Partial ordering relations',
+            'Function, Types of Function, Inverse Function, Composite of functions',
+            'Modular arithmetic and basic properties of congruences'
+          ]},
+          { unit: 'Unit III', title: 'Theory of Equations', topics: [
+            'Symmetric functions of the roots of an equation',
+            'Root of a multiplicity, Synthetic division',
+            'Greatest common Divisors',
+            'Relation between the roots and coefficients of general polynomial equations in one variable',
+            "Descarte's rule of signs",
+            'Solutions of cubic equations (Cardon method)',
+            'Biquadrate equation',
+            'Transformation of equations'
+          ]},
+          { unit: 'Unit IV', title: 'Group Theory', topics: [
+            'Definition and properties of a group',
+            'Abelian groups',
+            'Examples of groups, Subgroups and examples',
+            'Cosets and their properties',
+            "Lagrange's theorem and its applications",
+            'Normal subgroups and their properties',
+            'Simple groups',
+            'Factors groups'
+          ]}
+        ]
+      }
+    ]
+  },
+  'BCA': {
+    'Sem II': [
+      {
+        subject: 'Digital Electronics', code: 'CASC-04', credits: 4,
+        units: [
+          { unit: 'Unit I', title: 'Number System and Data Representation', topics: [
+            'Introduction to number systems (binary, decimal, octal, hexadecimal)',
+            'Inter-conversion between number systems',
+            'Complements in the number system',
+            'Representation of numeric arithmetic operations',
+            'Representation of integers, fixed point and floating point data',
+            'Codes and classification: weighted code (NBCD), non-weighted code (Excess-3, Gray code)',
+            'Alphanumeric codes: ASCII, UNICODE, EBCDIC',
+            'Error detecting code: parity bit coding technique',
+            'Error correcting codes: hamming code'
+          ]},
+          { unit: 'Unit II', title: 'Boolean Algebra & Digital Circuit Design', topics: [
+            'Boolean algebra and basic operations',
+            'Sum of product, product of sum',
+            'Simplification of Boolean expression using K-Map',
+            'Digital logic families and properties',
+            'Logic gate and its types',
+            'Construction of basic digital circuits using fundamental gates',
+            'Universal gates, simplification of digital circuit',
+            'Types of digital circuits: combinational circuit, sequential circuits'
+          ]},
+          { unit: 'Unit III', title: 'Combinational & Sequential Circuit', topics: [
+            'Adder: half adder, full adder, N bit adder',
+            'Subtractor: half subtractor, full subtractor, N bit subtractor',
+            'Decoder, Encoder, Multiplexer, De-multiplexer',
+            'Comparator, Code Convertor',
+            'Multivibrators / Latch',
+            'Flip-flop and its types: S R flip flop, D flip flop, J K flip flop, T flip flop, Master Slave flip flop',
+            'Register and its types',
+            'Counters and its types'
+          ]},
+          { unit: 'Unit IV', title: 'Microprocessors', topics: [
+            'Introduction of microprocessor',
+            'Evolution of microprocessor',
+            'Basic components in microprocessor',
+            'Basic microprocessor instruction',
+            'Addressing modes',
+            'Designing of eight-bit microprocessor (8085)',
+            'Designing of 16-bit microprocessor (8086)'
+          ]}
+        ]
+      },
+      {
+        subject: 'Data Structure', code: 'CASC-06T', credits: 3,
+        units: [
+          { unit: 'Unit I', title: 'Introduction & Arrays / Linked List', topics: [
+            'Introduction: Fundamentals of Algorithms, Data types: Primitive, Non-Primitive, ADT',
+            'Classification of Data Structure: Linear and Nonlinear Data Structure',
+            'Array: Arrays and its types, Memory allocation and address calculations',
+            'Sparse Array',
+            'Linked List: Types of Linked List and various operations: INSERT, DELETE, TRAVERSE',
+            'Introduction and Application of Stack and Queue'
+          ]},
+          { unit: 'Unit II', title: 'Stack & Queue', topics: [
+            'Stack: Definition, Operations PUSH, POP',
+            'Implementations using Array and Linked list',
+            'Applications of Stack: Infix, Prefix, Postfix representation and conversion',
+            'Postfix expression evaluation using Stack',
+            'Recursion using Stack',
+            'Queue: Definition, Types — Priority Queue, Circular queue, Double Ended Queue',
+            'Operations: INSERT, DELETE, TRAVERSE',
+            'Implementation Queue using Array and Linked list',
+            'Applications of Queue'
+          ]},
+          { unit: 'Unit III', title: 'Trees & Graphs', topics: [
+            'Tree: Definition of Trees and their types',
+            'Binary trees, Properties of Binary trees',
+            'Operations: Insertion, deletion, searching and traversal algorithm (preorder, post order, in-order traversal)',
+            'Binary Search Trees, Implementations, AVL Trees',
+            'Graph: Definition of Graph and their types',
+            'Adjacency and Incident (matrix & linked list)',
+            'Representation of graphs, Graph Traversal — BFS, DFS',
+            'Connectivity of Graphs, Weighted Graphs',
+            'Shortest Path Algorithm, Spanning Tree, Minimum Spanning Tree, Kruskal\'s and Prim\'s Algorithms'
+          ]},
+          { unit: 'Unit IV', title: 'Sorting & Searching', topics: [
+            'Types of Sorting: Selection Sort, Insertion Sort, Bubble Sort, Quick Sort',
+            'Merge Sort, Radix Sort',
+            'Searching: Linear search, Binary search'
+          ]}
+        ]
+      },
+      {
+        subject: 'Programming in C++', code: 'CASC-05T', credits: 3,
+        units: [
+          { unit: 'Unit I', title: 'Introduction and Programming Concepts', topics: [
+            'Definition of Program, Source file, Object file, Executable file, Header file, Language Translator',
+            'Assembler, Interpreter, Compiler, Testing, Debugging, Linker and Loader',
+            'Algorithms, Flow Charts, History of C language, Structure of C program',
+            'C Tokens: Identifiers, Keywords, Constants, Variables, Operators, Data Types',
+            'Control structure: Conditional and looping statements',
+            'Operator Precedence and Associativity',
+            'Array and its types, Pointer',
+            'Functions: Standard Library and User defined functions, function prototype',
+            'Call by value and Call by reference, recursive functions, String functions'
+          ]},
+          { unit: 'Unit II', title: 'Object Oriented Programming', topics: [
+            'Concept of object oriented programming, Features of C++',
+            'Structure of C++ program: Data types, structure, class and objects',
+            'Access Specifiers: Private, Public, Protected',
+            'Inline functions, static data and static functions',
+            'Constructor: Default constructor, Copy constructor, Parameterized constructor',
+            'Destructor'
+          ]},
+          { unit: 'Unit III', title: 'Inheritance and Polymorphism', topics: [
+            'Inheritance: Single, Multilevel, Multiple, Hierarchical and Hybrid Inheritance',
+            'Polymorphism: Definition, Compile time polymorphism: Function overloading, Operator overloading',
+            'Constructor overloading, Runtime polymorphism: Virtual Function, pure virtual function',
+            'Inline function, friend function, friend class'
+          ]},
+          { unit: 'Unit IV', title: 'Input-Output, File Handling & STL', topics: [
+            'I/O classes, File and Stream classes',
+            'Char I/O, String I/O, Object I/O',
+            'File Pointer, Opening and Closing file',
+            'Exception Handling and Standard Template Library',
+            'Definition, Exception basics, try, catch and throws keywords',
+            'Template'
+          ]}
+        ]
+      }
+    ]
+  }
+};
+
+// Syllabus
+function renderSyllabus() {
+  const cont = document.getElementById('syllabusContent');
+  const dept = currentUser.dept;
+  const sem = currentUser.sem;
+
+  // Check built-in syllabus first
+  const builtIn = BUILTIN_SYLLABUS[dept]?.[sem];
+
+  // Also check faculty-uploaded syllabi
+  const uploaded = getStorage('syllabi').filter(s => s.dept === dept && s.sem === sem);
+
+  if (!builtIn && !uploaded.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px"><div class="e-icon">📭</div><p>Syllabus not available yet for your semester.<br>Check the official university link above.</p></div>';
+    return;
+  }
+
+  let html = '';
+
+  // Render built-in syllabus (unit-wise)
+  if (builtIn) {
+    html += builtIn.map(s => `
+      <div class="card" style="margin-bottom:12px;overflow:visible">
+        <div class="card-header" style="background:var(--blue-light)">
+          <div>
+            <div class="card-title" style="color:var(--blue)">📘 ${s.subject}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">${s.code} · ${s.credits} Credits · ${currentUser.dept} ${currentUser.sem}</div>
+          </div>
+          <span class="chip chip-blue">${s.units.reduce((a,u)=>a+u.topics.length,0)} topics</span>
+        </div>
+        <div class="card-body" style="padding:12px">
+          ${s.units.map(u => `
+            <div class="syllabus-subject" style="margin-bottom:8px">
+              <div class="syllabus-subject-header" onclick="toggleSyllabus(this)" style="border-radius:8px">
+                <span style="color:var(--text2)">${u.unit}: ${u.title}</span>
+                <span style="font-size:11px;color:var(--muted)">▼ ${u.topics.length}</span>
+              </div>
+              <div class="syllabus-topics open">
+                ${u.topics.map((t,i) => `<div class="topic-item"><span class="topic-num">${String(i+1).padStart(2,'0')}</span>${t}</div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`).join('');
+  }
+
+  // Render faculty-uploaded syllabi
+  if (uploaded.length) {
+    html += uploaded.map((s, idx) => {
+      /*
+       * WHY: We need the global index in the full 'syllabi' cache
+       * (not just the filtered 'uploaded' array) so that deleteSyllabus()
+       * can splice the correct entry. We look it up using the id or title.
+       */
+      const allSyllabi = getStorage('syllabi');
+      const globalIdx = allSyllabi.findIndex(item =>
+        (s.id && item.id === s.id) || (item.subject === s.subject && item.dept === s.dept && item.sem === s.sem)
+      );
+
+      // Delete button only rendered for faculty role
+      const deleteBtn = currentRole === 'faculty'
+        ? `<button
+             onclick="deleteSyllabus('${s.id||''}', ${globalIdx})"
+             title="Delete this syllabus permanently"
+             style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                    border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;
+                    cursor:pointer;transition:all 0.15s;margin-top:8px;"
+             onmouseover="this.style.background='#dc2626';this.style.color='white'"
+             onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+             🗑 Delete Syllabus
+           </button>`
+        : '';
+
+      return `
+      <div class="syllabus-subject" style="margin-bottom:8px">
+        <div class="syllabus-subject-header" onclick="toggleSyllabus(this)">
+          <span>📘 ${s.subject} ${s.code ? '<span style="font-size:11px;color:var(--muted);font-weight:400">('+s.code+')</span>' : ''}</span>
+          <span style="font-size:12px;color:var(--muted)">▼ ${s.topics.length} topics</span>
+        </div>
+        <div class="syllabus-topics">
+          ${s.topics.map((t,i) => `<div class="topic-item"><span class="topic-num">${String(i+1).padStart(2,'0')}</span>${t}</div>`).join('')}
+          <div class="posted-by" style="margin-top:8px">Uploaded by ${s.by}</div>
+          ${deleteBtn}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  cont.innerHTML = html;
+}
+
+function toggleSyllabus(el) {
+  el.nextElementSibling.classList.toggle('open');
+}
+
+// Assignments
+function renderAssignments() {
+  const all = getStorage('assignments');
+  const filtered = all.filter(a => (a.dept === currentUser.dept || a.dept === 'All') && (a.sem === currentUser.sem || a.sem === 'All'));
+  const cont = document.getElementById('assignmentsContent');
+  if (!filtered.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px"><div class="e-icon">📭</div><p>No assignments posted yet.</p></div>';
+    return;
+  }
+  cont.innerHTML = filtered.map(a => {
+    const daysLeft = a.due ? Math.ceil((new Date(a.due) - new Date()) / (1000*60*60*24)) : null;
+    const urgent = daysLeft !== null && daysLeft <= 3;
+    return `
+    <div class="assign-item">
+      <div class="assign-header">
+        <div>
+          <div class="assign-title">${a.title}</div>
+          <div class="assign-subject">${a.subject} · ${a.dept} · ${a.sem}</div>
+        </div>
+        ${a.marks ? '<span class="chip chip-blue">'+a.marks+' marks</span>' : ''}
+      </div>
+      ${a.desc ? '<div class="assign-desc">'+a.desc+'</div>' : ''}
+      <div class="assign-footer">
+        <div class="assign-due ${urgent ? 'urgent' : ''}">
+          📅 Due: ${a.due || 'No deadline'}${daysLeft !== null ? ' ('+daysLeft+' days left)' : ''}
+        </div>
+        <div class="posted-by">By ${a.by}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══ FACULTY: ACTIONS ═══
+// ── NOTE FILE HANDLING ──
+let _noteFileData = null;
+
+function handleNoteFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 25 * 1024 * 1024) { showToast('⚠️ File too large! Max 25MB'); input.value=''; return; }
+  const allowed = ['application/pdf','image/jpeg','image/jpg','image/png'];
+  if (!allowed.includes(file.type)) { showToast('⚠️ Only PDF, JPG, PNG allowed'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    _noteFileData = { name: file.name, size: file.size, type: file.type, base64: e.target.result };
+    const preview = document.getElementById('note-file-preview');
+    preview.style.display = 'flex';
+    document.getElementById('note-file-icon').textContent = file.type === 'application/pdf' ? '📕' : '🖼️';
+    document.getElementById('note-file-name-display').textContent = file.name;
+    const sz = file.size > 1024*1024 ? (file.size/(1024*1024)).toFixed(2)+' MB' : (file.size/1024).toFixed(1)+' KB';
+    document.getElementById('note-file-size-display').textContent = sz;
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleNoteDrop(e) {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer(); dt.items.add(file);
+  const inp = document.getElementById('note-file-input');
+  inp.files = dt.files;
+  handleNoteFile(inp);
+}
+
+function clearNoteFile() {
+  _noteFileData = null;
+  document.getElementById('note-file-input').value = '';
+  document.getElementById('note-file-preview').style.display = 'none';
+}
+
+function uploadNote() {
+  const title = document.getElementById('note-title').value.trim();
+  const subject = document.getElementById('note-subject').value.trim();
+  const dept = document.getElementById('note-dept').value;
+  const sem = document.getElementById('note-sem').value;
+  const desc = document.getElementById('note-desc').value.trim();
+  const link = document.getElementById('note-link').value.trim();
+
+  if (!title || !subject) { showToast('⚠️ Please fill title and subject'); return; }
+  if (!_noteFileData && !link) { showToast('⚠️ Please attach a file or paste a link'); return; }
+
+  const data = { title, subject, dept, sem, desc, link, by: currentUser.name, date: new Date().toLocaleDateString('en-IN') };
+  if (_noteFileData) {
+    data.fileData = _noteFileData.base64;
+    data.fileType = _noteFileData.type;
+    data.fileName = _noteFileData.name;
+  }
+
+  fbAdd('notes', data);
+  updateFacultyStats();
+  renderFacultyUploads();
+
+  ['note-title','note-subject','note-desc','note-link'].forEach(id => document.getElementById(id).value = '');
+  clearNoteFile();
+  showToast('✅ Note uploaded! Students can now access it.');
+}
+
+// ── SYLLABUS FILE HANDLING ──
+let _sylFileData = null; // { name, size, type, base64 }
+
+function handleSylFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 25 * 1024 * 1024) { showToast('⚠️ File too large! Max 25MB'); input.value=''; return; }
+  const allowed = ['application/pdf','image/jpeg','image/jpg','image/png'];
+  if (!allowed.includes(file.type)) { showToast('⚠️ Only PDF, JPG, PNG allowed'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    _sylFileData = { name: file.name, size: file.size, type: file.type, base64: e.target.result };
+    showSylPreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleSylDrop(e) {
+  e.preventDefault();
+  document.getElementById('syl-drop-zone').style.borderColor = 'var(--border)';
+  document.getElementById('syl-drop-zone').style.background = 'rgba(255,255,255,0.02)';
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  // create fake input
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  const inp = document.getElementById('syl-file-input');
+  inp.files = dt.files;
+  handleSylFile(inp);
+}
+
+function showSylPreview() {
+  if (!_sylFileData) return;
+  const preview = document.getElementById('syl-file-preview');
+  preview.style.display = 'flex';
+  document.getElementById('syl-file-icon').textContent = _sylFileData.type === 'application/pdf' ? '📕' : '🖼️';
+  document.getElementById('syl-file-name').textContent = _sylFileData.name;
+  const kb = (_sylFileData.size / 1024).toFixed(1);
+  const mb = (_sylFileData.size / (1024*1024)).toFixed(2);
+  document.getElementById('syl-file-size').textContent = _sylFileData.size > 1024*1024 ? mb+' MB' : kb+' KB';
+}
+
+function clearSylFile() {
+  _sylFileData = null;
+  document.getElementById('syl-file-input').value = '';
+  document.getElementById('syl-file-preview').style.display = 'none';
+}
+
+function uploadSyllabus() {
+  const subject = document.getElementById('syl-subject').value.trim();
+  const code = document.getElementById('syl-code').value.trim();
+  const dept = document.getElementById('syl-dept').value;
+  const sem = document.getElementById('syl-sem').value;
+  const topicsRaw = document.getElementById('syl-topics').value.trim();
+
+  if (!subject) { showToast('⚠️ Please enter subject name'); return; }
+
+  const topics = topicsRaw ? topicsRaw.split('\n').map(t => t.trim()).filter(Boolean) : [];
+  const data = { subject, code, dept, sem, topics, by: currentUser.name, date: new Date().toLocaleDateString('en-IN') };
+
+  // attach file if selected
+  if (_sylFileData) {
+    data.fileName = _sylFileData.name;
+    data.fileType = _sylFileData.type;
+    data.fileData = _sylFileData.base64; // base64 string
+  }
+
+  fbAdd('syllabi', data).then(() => { renderFacultySyllabusList(); });
+  updateFacultyStats();
+
+  ['syl-subject','syl-code','syl-topics'].forEach(id => document.getElementById(id).value = '');
+  clearSylFile();
+  showToast('✅ Syllabus uploaded successfully!');
+}
+
+function renderFacultySyllabusList() {
+  const all = getStorage('syllabi');
+  const cont = document.getElementById('facultySyllabusList');
+  if (!cont) return;
+  if (!all.length) {
+    cont.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-dim);font-size:13px">No syllabus uploaded yet.</div>';
+    return;
+  }
+  cont.innerHTML = all.map((s, idx) => {
+    const fileBtn = s.fileData ? `
+      <button onclick="viewSylFile(${idx})" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;margin-right:6px">
+        ${s.fileType === 'application/pdf' ? '📕 View PDF' : '🖼️ View Image'}
+      </button>` : '';
+    const deleteBtn = `<button onclick="deleteSyllabus('${s.id||''}', ${idx})" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑 Delete</button>`;
+    return `<div style="border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:rgba(255,255,255,0.02)">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text)">${s.subject} ${s.code ? '<span style="font-size:11px;color:var(--text-dim);font-weight:400">'+s.code+'</span>' : ''}</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${s.dept} · ${s.sem} · Uploaded by ${s.by} · ${s.date}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          ${fileBtn}
+          ${deleteBtn}
+        </div>
+      </div>
+      ${s.topics && s.topics.length ? `<div style="display:flex;flex-wrap:wrap;gap:6px">${s.topics.map(t => '<span style="font-size:11px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--purple);padding:2px 8px;border-radius:20px">'+t+'</span>').join('')}</div>` : ''}
+      ${s.fileName ? `<div style="margin-top:8px;font-size:11px;color:var(--text-dim)">📎 ${s.fileName}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function viewSylFile(idx) {
+  const s = getStorage('syllabi')[idx];
+  if (!s || !s.fileData) return;
+  if (s.fileType === 'application/pdf') {
+    const win = window.open('', '_blank');
+    win.document.write('<html><body style="margin:0"><embed src="'+s.fileData+'" width="100%" height="100%" type="application/pdf"></body></html>');
+  } else {
+    const win = window.open('', '_blank');
+    win.document.write('<html><body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh"><img src="'+s.fileData+'" style="max-width:100%;max-height:100vh"></body></html>');
+  }
+}
+
+async function deleteSyllabus(firebaseId, cacheIdx) {
+  if (!confirm('Delete this syllabus? This cannot be undone.')) return;
+  if (window.FB_READY && firebaseId) {
+    try { await db.collection('syllabi').doc(firebaseId).delete(); showToast('🗑️ Deleted!'); return; } catch(e) {}
+  }
+  window._cache['syllabi'].splice(cacheIdx, 1);
+  showToast('🗑️ Deleted!');
+  renderFacultySyllabusList();
+  renderSyllabus();
+}
+
+function postAssignment() {
+  const title = document.getElementById('assign-title').value.trim();
+  const subject = document.getElementById('assign-subject').value.trim();
+  const dept = document.getElementById('assign-dept').value;
+  const sem = document.getElementById('assign-sem').value;
+  const desc = document.getElementById('assign-desc').value.trim();
+  const due = document.getElementById('assign-due').value;
+  const marks = document.getElementById('assign-marks').value;
+
+  if (!title || !subject) { showToast('⚠️ Please fill title and subject'); return; }
+
+  fbAdd('assignments', { title, subject, dept, sem, desc, due, marks, by: currentUser.name, date: new Date().toLocaleDateString() });
+  updateFacultyStats();
+
+  ['assign-title','assign-subject','assign-desc','assign-due','assign-marks'].forEach(id => document.getElementById(id).value = '');
+  showToast('✅ Assignment posted successfully!');
+}
+
+function updateFacultyStats() {
+  const notes = getStorage('notes').filter(n => n.by === currentUser?.name);
+  const assigns = getStorage('assignments').filter(a => a.by === currentUser?.name);
+  const syllabi = getStorage('syllabi').filter(s => s.by === currentUser?.name);
+  document.getElementById('f-stat-notes').textContent = notes.length;
+  document.getElementById('f-stat-assign').textContent = assigns.length;
+  document.getElementById('f-stat-syllabus').textContent = syllabi.length;
+}
+
+function renderFacultyUploads() {
+  const allNotes = getStorage('notes');
+  const allAssigns = getStorage('assignments');
+  const allSyllabi = getStorage('syllabi');
+
+  document.getElementById('f-notes-list').innerHTML = allNotes.length
+    ? allNotes.map((n, idx) => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,0.01)">
+        <div style="font-size:22px">📄</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${n.title}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${n.subject} · ${n.dept} · ${n.sem} · By ${n.by}</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-shrink:0">
+          ${n.link ? `<a href="${n.link}" target="_blank" style="background:var(--blue-light);border:1px solid var(--blue-mid);color:var(--blue);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;text-decoration:none">Open ↗</a>` : ''}
+          <button onclick="deleteNote('${n.id||''}',${idx})" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑</button>
+        </div>
+      </div>`).join('')
+    : '<div class="no-data">No notes uploaded yet</div>';
+
+  document.getElementById('f-assign-list').innerHTML = allAssigns.length
+    ? allAssigns.map((a, idx) => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,0.01)">
+        <div style="font-size:22px">📝</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${a.title}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${a.subject} · ${a.dept} · ${a.sem} · Due: ${a.due||'TBD'} · By ${a.by}</div>
+        </div>
+        <button onclick="deleteAssignment('${a.id||''}',${idx})" style="flex-shrink:0;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑</button>
+      </div>`).join('')
+    : '<div class="no-data">No assignments posted yet</div>';
+
+  document.getElementById('f-syllabus-list').innerHTML = allSyllabi.length
+    ? allSyllabi.map((s, idx) => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,0.01)">
+        <div style="font-size:22px">📋</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${s.subject} ${s.code?'('+s.code+')':''}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">${s.dept} · ${s.sem} · ${(s.topics||[]).length} topics · By ${s.by}</div>
+        </div>
+        <button onclick="deleteSyllabus('${s.id||''}',${idx})" style="flex-shrink:0;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑</button>
+      </div>`).join('')
+    : '<div class="no-data">No syllabus uploaded yet</div>';
+}
+
+
+// ═══ TIMETABLE MANAGEMENT ═══
+
+/**
+ * Deletes a faculty-managed (Firebase-backed) timetable entry.
+ * Called when custom entries already exist in cache/Firebase.
+ *
+ * @param {string} firebaseId - Firestore document ID (may be empty for local)
+ * @param {number} cacheIdx   - Index in the filtered customEntries array
+ * @param {string} dept       - Department (e.g. 'BCA')
+ * @param {string} sem        - Semester  (e.g. 'Sem II')
+ */
+async function deleteTimetableEntry(firebaseId, cacheIdx, dept, sem) {
+  if (!confirm('Delete this class from the timetable permanently?')) return;
+
+  // Attempt Firebase delete first (production path)
+  if (window.FB_READY && firebaseId) {
+    try {
+      await db.collection('timetable').doc(firebaseId).delete();
+      showToast('🗑️ Class removed from timetable!');
+      // Firebase listener will auto-refresh renderClasses via startListeners()
+      return;
+    } catch (err) {
+      console.error('Firebase timetable delete failed:', err);
+      // Fall through to local cache delete
+    }
+  }
+
+  // Local fallback: remove by matching dept+sem+index
+  const all = getStorage('timetable');
+  const deptEntries = all.filter(t => t.dept === dept && t.sem === sem);
+
+  if (deptEntries[cacheIdx]) {
+    // Find the actual global index and splice it out
+    const globalIdx = all.indexOf(deptEntries[cacheIdx]);
+    if (globalIdx !== -1) {
+      window._cache['timetable'].splice(globalIdx, 1);
+    }
+  }
+
+  showToast('🗑️ Class removed!');
+  renderClasses();
+}
+
+/**
+ * Called when faculty tries to delete a hardcoded TIMETABLE entry.
+ * Strategy:
+ *   1. Copy all hardcoded entries for this dept+sem into Firebase/cache.
+ *   2. Remove the selected entry from that copied set.
+ *   3. Now the timetable is Firebase-backed and future deletes work normally.
+ *
+ * WHY this approach: We never mutate the TIMETABLE constant (it's read-only).
+ * Instead we "promote" it to Firebase on first delete, giving faculty full
+ * control going forward.
+ *
+ * @param {number} deleteIdx - Index of the entry to remove from hardcoded list
+ * @param {string} dept      - Department
+ * @param {string} sem       - Semester
+ */
+async function importAndDeleteTimetableEntry(deleteIdx, dept, sem) {
+  if (!confirm(
+    'This will import the timetable into the database and remove this class.\n\nContinue?'
+  )) return;
+
+  // Get hardcoded entries, exclude the one being deleted
+  const hardcoded = (TIMETABLE[dept]?.[sem] || []);
+  const toImport  = hardcoded.filter((_, i) => i !== deleteIdx);
+
+  if (!toImport.length) {
+    showToast('⚠️ No entries left to import after deletion.');
+    return;
+  }
+
+  // Save each remaining entry to Firebase / local cache
+  try {
+    for (const entry of toImport) {
+      const record = { ...entry, dept, sem, addedBy: currentUser.name };
+      await fbAdd('timetable', record);
+    }
+    showToast('✅ Timetable imported & class removed!');
+    renderClasses();
+  } catch (err) {
+    console.error('Timetable import failed:', err);
+    showToast('❌ Failed to import timetable. Try again.');
+  }
+}
+
+/**
+ * Faculty timetable management page renderer.
+ * Shows all entries for all depts/sems with delete buttons.
+ */
+function renderFacultyTimetable() {
+  const cont = document.getElementById('f-timetable-list');
+  if (!cont) return;
+
+  // Group custom entries by dept+sem for display
+  const custom = getStorage('timetable');
+
+  if (!custom.length) {
+    cont.innerHTML = `
+      <div style="text-align:center;padding:40px;color:var(--text-dim)">
+        <div style="font-size:40px;margin-bottom:12px">📅</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No custom timetable yet</div>
+        <div style="font-size:12px;color:var(--text-dim)">
+          Go to Classes in any student view and click 🗑 on a class to import &amp; manage the timetable.
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Group by dept + sem
+  const grouped = {};
+  custom.forEach((t, idx) => {
+    const key = `${t.dept} — ${t.sem}`;
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push({ ...t, _globalIdx: idx });
+  });
+
+  cont.innerHTML = Object.entries(grouped).map(([groupKey, entries]) => `
+    <div style="margin-bottom:20px">
+      <div style="font-size:13px;font-weight:700;color:var(--text);
+                  padding:8px 12px;background:rgba(255,255,255,0.03);
+                  border:1px solid var(--border);border-radius:8px;margin-bottom:8px">
+        📅 ${groupKey}
+      </div>
+      ${entries.map(e => `
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;
+                    border:1px solid var(--border);border-radius:8px;
+                    margin-bottom:6px;background:rgba(255,255,255,0.01)">
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${e.sub}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              ${e.time} · 👨‍🏫 ${e.teacher}
+            </div>
+          </div>
+          <button
+            onclick="deleteTimetableEntry('${e.id||''}', ${e._globalIdx}, '${e.dept}', '${e.sem}')"
+            style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                   border-radius:6px;padding:5px 12px;font-size:12px;font-weight:700;
+                   cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+            onmouseover="this.style.background='#dc2626';this.style.color='white'"
+            onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+            🗑 Delete
+          </button>
+        </div>`).join('')}
+    </div>`).join('');
+}
+async function deleteNote(firebaseId, cacheIdx) {
+  if (!confirm('Delete this note?')) return;
+  if (window.FB_READY && firebaseId) {
+    try { await db.collection('notes').doc(firebaseId).delete(); showToast('🗑️ Deleted!'); return; } catch(e) {}
+  }
+  window._cache['notes'].splice(cacheIdx, 1);
+  showToast('🗑️ Deleted!');
+  renderFacultyUploads();
+  renderNotes();
+}
+
+async function deleteAssignment(firebaseId, cacheIdx) {
+  if (!confirm('Delete this assignment?')) return;
+  if (window.FB_READY && firebaseId) {
+    try { await db.collection('assignments').doc(firebaseId).delete(); showToast('🗑️ Deleted!'); return; } catch(e) {}
+  }
+  window._cache['assignments'].splice(cacheIdx, 1);
+  showToast('🗑️ Deleted!');
+  renderFacultyUploads();
+  renderAssignments();
+}
+
+
+// ════════════════════════════════════════════════════════════
+// STUDENT UPLOAD SYSTEM
+// Students can share notes and syllabus files with peers.
+// Uploads go to separate Firebase collections (student_notes,
+// student_syllabi) so they never mix with faculty content.
+// Delete is restricted to the uploader only.
+// ════════════════════════════════════════════════════════════
+
+// ── Shared file size/type validator ──
+function validateStudentFile(file) {
+  const MAX_SIZE   = 25 * 1024 * 1024; // 25MB
+  const ALLOWED    = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+  if (!file)                          return { ok: false, msg: 'No file selected.' };
+  if (file.size > MAX_SIZE)           return { ok: false, msg: 'File too large. Max 25MB.' };
+  if (!ALLOWED.includes(file.type))   return { ok: false, msg: 'Only PDF, JPG, PNG allowed.' };
+  return { ok: true };
+}
+
+// ── Shared file reader — returns Promise<base64> ──
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = e => resolve(e.target.result);
+    reader.onerror = () => reject(new Error('File read failed.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── Shared file viewer ──
+function viewStudentFile(collection, docId) {
+  // Find doc in local cache by id
+  const all  = getStorage(collection);
+  const doc  = all.find(d => d.id === docId);
+  if (!doc || !doc.fileData) { showToast('⚠️ File not available.'); return; }
+
+  const win = window.open('', '_blank');
+  if (doc.fileType === 'application/pdf') {
+    win.document.write(
+      '<html><body style="margin:0">' +
+      '<embed src="' + doc.fileData + '" width="100%" height="100%" type="application/pdf">' +
+      '</body></html>'
+    );
+  } else {
+    win.document.write(
+      '<html><body style="margin:0;background:#000;display:flex;' +
+      'justify-content:center;align-items:center;min-height:100vh">' +
+      '<img src="' + doc.fileData + '" style="max-width:100%;max-height:100vh">' +
+      '</body></html>'
+    );
+  }
+}
+
+// ════════ STUDENT NOTES ════════
+
+let _snFileData = null; // { name, size, type, base64 }
+
+function toggleStudentNoteForm() {
+  const form  = document.getElementById('studentNoteForm');
+  const arrow = document.getElementById('studentNoteFormArrow');
+  const open  = form.style.display === 'block';
+  form.style.display  = open ? 'none' : 'block';
+  arrow.textContent   = open ? '▼ Expand' : '▲ Collapse';
+}
+
+async function handleStudentNoteFile(file) {
+  const check = validateStudentFile(file);
+  if (!check.ok) { showToast('⚠️ ' + check.msg); return; }
+
+  try {
+    const base64   = await readFileAsBase64(file);
+    _snFileData    = { name: file.name, size: file.size, type: file.type, base64 };
+
+    // Show preview
+    const preview  = document.getElementById('sn-file-preview');
+    preview.style.display = 'flex';
+    document.getElementById('sn-file-icon').textContent =
+      file.type === 'application/pdf' ? '📕' : '🖼️';
+    document.getElementById('sn-file-name').textContent = file.name;
+    const sz = file.size > 1024 * 1024
+      ? (file.size / (1024 * 1024)).toFixed(2) + ' MB'
+      : (file.size / 1024).toFixed(1) + ' KB';
+    document.getElementById('sn-file-size').textContent = sz;
+  } catch (err) {
+    showToast('❌ Could not read file. Try again.');
+    console.error('Student note file read error:', err);
+  }
+}
+
+function clearStudentNoteFile() {
+  _snFileData = null;
+  document.getElementById('sn-file-input').value   = '';
+  document.getElementById('sn-file-preview').style.display = 'none';
+}
+
+async function uploadStudentNote() {
+  // --- Input validation ---
+  const title   = document.getElementById('sn-title').value.trim();
+  const subject = document.getElementById('sn-subject').value.trim();
+  const desc    = document.getElementById('sn-desc').value.trim();
+
+  if (!title)       { showToast('⚠️ Please enter a title.'); return; }
+  if (!subject)     { showToast('⚠️ Please enter the subject.'); return; }
+  if (!_snFileData) { showToast('⚠️ Please attach a file.'); return; }
+
+  /*
+   * WHY: We store dept and sem from currentUser so the filter in
+   * renderStudentNotes() can show only relevant notes to each student.
+   * uploadedBy stores the phone (unique ID) for ownership checks on delete.
+   */
+  const record = {
+    title,
+    subject,
+    desc,
+    dept        : currentUser.dept,
+    sem         : currentUser.sem,
+    by          : currentUser.name,
+    uploadedBy  : currentUser.phone || currentUser.name, // ownership key
+    date        : new Date().toLocaleDateString('en-IN'),
+    fileData    : _snFileData.base64,
+    fileType    : _snFileData.type,
+    fileName    : _snFileData.name,
+  };
+
+  await fbAdd('student_notes', record);
+
+  // Reset form
+  ['sn-title', 'sn-subject', 'sn-desc'].forEach(id =>
+    document.getElementById(id).value = ''
+  );
+  clearStudentNoteFile();
+  renderStudentNotes();
+  showToast('✅ Note shared with your classmates!');
+}
+
+function renderStudentNotes() {
+  const cont = document.getElementById('studentNotesContent');
+  if (!cont) return;
+
+  const all = getStorage('student_notes').filter(n =>
+    (n.dept === currentUser.dept || n.dept === 'All') &&
+    (n.sem  === currentUser.sem  || n.sem  === 'All')
+  );
+
+  if (!all.length) {
+    cont.innerHTML = `
+      <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+        <div class="e-icon">👥</div>
+        <p>No student notes shared yet.<br>Be the first to share your notes!</p>
+      </div>`;
+    return;
+  }
+
+  cont.innerHTML = all.map((n, idx) => {
+    // View button
+    const viewBtn = `
+      <button onclick="viewStudentFile('student_notes', '${n.id||''}')"
+              style="background:var(--blue-light);border:1px solid var(--blue-mid);
+                     color:var(--blue);border-radius:8px;padding:6px 12px;
+                     font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0">
+        ${n.fileType === 'application/pdf' ? '📕 View PDF' : '🖼️ View'}
+      </button>`;
+
+    /*
+     * Delete only shown if the current user uploaded this note.
+     * We compare uploadedBy (phone/name) to current user's identifier.
+     * This prevents students from deleting each other's notes.
+     */
+    const isOwner = n.uploadedBy === (currentUser.phone || currentUser.name);
+    const deleteBtn = isOwner
+      ? `<button
+           onclick="deleteStudentNote('${n.id||''}', ${idx})"
+           style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                  border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;
+                  cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+           onmouseover="this.style.background='#dc2626';this.style.color='white'"
+           onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+           🗑
+         </button>`
+      : '';
+
+    return `
+    <div class="file-item" style="display:flex;align-items:center;gap:12px">
+      <div class="file-icon" style="background:#f0fdf4;font-size:20px">📄</div>
+      <div class="file-info" style="flex:1">
+        <div class="file-name">${n.title}</div>
+        <div class="file-meta">
+          ${n.subject} · ${n.dept} · ${n.sem}
+          · <span style="color:#16a34a;font-weight:600">👤 ${n.by}</span>
+          · ${n.date}
+        </div>
+        ${n.desc ? '<div class="file-meta" style="margin-top:2px">'+n.desc+'</div>' : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        ${viewBtn}
+        ${deleteBtn}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteStudentNote(firebaseId, cacheIdx) {
+  // Ownership check — must be the uploader
+  const note = getStorage('student_notes')[cacheIdx];
+  if (note && note.uploadedBy !== (currentUser.phone || currentUser.name)) {
+    showToast('❌ You can only delete your own notes.');
+    return;
+  }
+  if (!confirm('Delete your shared note?')) return;
+
+  if (window.FB_READY && firebaseId) {
+    try {
+      await db.collection('student_notes').doc(firebaseId).delete();
+      showToast('🗑️ Note deleted!');
+      return;
+    } catch (err) { console.error('Firebase delete error:', err); }
+  }
+
+  // Local fallback
+  window._cache['student_notes'].splice(cacheIdx, 1);
+  showToast('🗑️ Note deleted!');
+  renderStudentNotes();
+}
+
+// ════════ STUDENT SYLLABUS ════════
+
+let _ssFileData = null;
+
+function toggleStudentSylForm() {
+  const form  = document.getElementById('studentSylForm');
+  const arrow = document.getElementById('studentSylFormArrow');
+  const open  = form.style.display === 'block';
+  form.style.display = open ? 'none' : 'block';
+  arrow.textContent  = open ? '▼ Expand' : '▲ Collapse';
+}
+
+async function handleStudentSylFile(file) {
+  const check = validateStudentFile(file);
+  if (!check.ok) { showToast('⚠️ ' + check.msg); return; }
+
+  try {
+    const base64 = await readFileAsBase64(file);
+    _ssFileData  = { name: file.name, size: file.size, type: file.type, base64 };
+
+    const preview = document.getElementById('ss-file-preview');
+    preview.style.display = 'flex';
+    document.getElementById('ss-file-icon').textContent =
+      file.type === 'application/pdf' ? '📕' : '🖼️';
+    document.getElementById('ss-file-name').textContent = file.name;
+    const sz = file.size > 1024 * 1024
+      ? (file.size / (1024 * 1024)).toFixed(2) + ' MB'
+      : (file.size / 1024).toFixed(1) + ' KB';
+    document.getElementById('ss-file-size').textContent = sz;
+  } catch (err) {
+    showToast('❌ Could not read file. Try again.');
+    console.error('Student syllabus file read error:', err);
+  }
+}
+
+function clearStudentSylFile() {
+  _ssFileData = null;
+  document.getElementById('ss-file-input').value = '';
+  document.getElementById('ss-file-preview').style.display = 'none';
+}
+
+async function uploadStudentSyllabus() {
+  const subject = document.getElementById('ss-subject').value.trim();
+  const desc    = document.getElementById('ss-desc').value.trim();
+
+  if (!subject)     { showToast('⚠️ Please enter the subject name.'); return; }
+  if (!_ssFileData) { showToast('⚠️ Please attach a file.'); return; }
+
+  const record = {
+    subject,
+    desc,
+    dept        : currentUser.dept,
+    sem         : currentUser.sem,
+    by          : currentUser.name,
+    uploadedBy  : currentUser.phone || currentUser.name,
+    date        : new Date().toLocaleDateString('en-IN'),
+    fileData    : _ssFileData.base64,
+    fileType    : _ssFileData.type,
+    fileName    : _ssFileData.name,
+  };
+
+  await fbAdd('student_syllabi', record);
+
+  ['ss-subject', 'ss-desc'].forEach(id =>
+    document.getElementById(id).value = ''
+  );
+  clearStudentSylFile();
+  renderStudentSyllabus();
+  showToast('✅ Syllabus shared with your classmates!');
+}
+
+function renderStudentSyllabus() {
+  const cont = document.getElementById('studentSyllabusContent');
+  if (!cont) return;
+
+  const all = getStorage('student_syllabi').filter(s =>
+    s.dept === currentUser.dept && s.sem === currentUser.sem
+  );
+
+  if (!all.length) {
+    cont.innerHTML = `
+      <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+        <div class="e-icon">👥</div>
+        <p>No syllabus shared by students yet.<br>Be the first to share!</p>
+      </div>`;
+    return;
+  }
+
+  cont.innerHTML = all.map((s, idx) => {
+    const viewBtn = `
+      <button onclick="viewStudentFile('student_syllabi', '${s.id||''}')"
+              style="background:#fdf4ff;border:1px solid #e9d5ff;
+                     color:#9333ea;border-radius:8px;padding:6px 12px;
+                     font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0">
+        ${s.fileType === 'application/pdf' ? '📕 View PDF' : '🖼️ View'}
+      </button>`;
+
+    const isOwner  = s.uploadedBy === (currentUser.phone || currentUser.name);
+    const deleteBtn = isOwner
+      ? `<button
+           onclick="deleteStudentSyllabus('${s.id||''}', ${idx})"
+           style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                  border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;
+                  cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+           onmouseover="this.style.background='#dc2626';this.style.color='white'"
+           onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+           🗑
+         </button>`
+      : '';
+
+    return `
+    <div class="file-item" style="display:flex;align-items:center;gap:12px">
+      <div class="file-icon" style="background:#fdf4ff;font-size:20px">📋</div>
+      <div class="file-info" style="flex:1">
+        <div class="file-name">${s.subject}</div>
+        <div class="file-meta">
+          ${s.dept} · ${s.sem}
+          · <span style="color:#9333ea;font-weight:600">👤 ${s.by}</span>
+          · ${s.date}
+        </div>
+        ${s.desc ? '<div class="file-meta" style="margin-top:2px">'+s.desc+'</div>' : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+        ${viewBtn}
+        ${deleteBtn}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteStudentSyllabus(firebaseId, cacheIdx) {
+  const syl = getStorage('student_syllabi')[cacheIdx];
+  if (syl && syl.uploadedBy !== (currentUser.phone || currentUser.name)) {
+    showToast('❌ You can only delete your own uploads.');
+    return;
+  }
+  if (!confirm('Delete your shared syllabus?')) return;
+
+  if (window.FB_READY && firebaseId) {
+    try {
+      await db.collection('student_syllabi').doc(firebaseId).delete();
+      showToast('🗑️ Syllabus deleted!');
+      return;
+    } catch (err) { console.error('Firebase delete error:', err); }
+  }
+
+  window._cache['student_syllabi'].splice(cacheIdx, 1);
+  showToast('🗑️ Syllabus deleted!');
+  renderStudentSyllabus();
+}
+
+function handleFileSelect(input, targetId) {
+  if (input.files && input.files[0]) {
+    document.getElementById(targetId).textContent = '📎 ' + input.files[0].name + ' (attach Google Drive link to share)';
+  }
+}
+
+// ═══ TOAST ═══
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Render classes on section switch override
+const origShowPage = showPage;
+window.showPage = function(id, mobile=false) {
+  origShowPage(id, mobile);
+  if (id === 'classes') renderClasses();
+  if (id === 'dashboard') renderStudentData();
+};
+
+
+// ═══ NOTICES ═══
+function postNotice() {
+  const title = document.getElementById('notice-title').value.trim();
+  const content = document.getElementById('notice-content').value.trim();
+  const priority = document.getElementById('notice-priority').value;
+  const dept = document.getElementById('notice-dept').value;
+  const sem = document.getElementById('notice-sem').value;
+  const expiry = document.getElementById('notice-expiry').value;
+
+  if (!title || !content) { showToast('⚠️ Please fill title and content'); return; }
+
+  fbAdd('notices', { title, content, priority, dept, sem, expiry, by: currentUser.name, date: new Date().toLocaleDateString('en-IN') }).then(() => {
+    renderFacultyNotices();
+  });
+
+  ['notice-title','notice-content','notice-expiry'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('notice-priority').value = 'normal';
+  showToast('✅ Notice posted successfully!');
+}
+
+function renderNotices() {
+  const all = getStorage('notices');
+  const filtered = all.filter(n =>
+    (n.dept === 'All' || n.dept === currentUser.dept) &&
+    (n.sem === 'All' || n.sem === currentUser.sem)
+  );
+  const cont = document.getElementById('noticesContent');
+  if (!filtered.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px"><div class="e-icon">📭</div><p>No notices posted yet.</p></div>';
+    return;
+  }
+  const priorityConfig = {
+    urgent:    { color: '#dc2626', bg: '#fef2f2', border: '#fecaca', icon: '🔴' },
+    important: { color: '#ea580c', bg: '#fff7ed', border: '#fed7aa', icon: '🟠' },
+    normal:    { color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe', icon: '🔵' }
+  };
+  cont.innerHTML = all.map((n, idx) => {
+    // skip if not matching dept/sem filter
+    if (n.dept !== 'All' && n.dept !== currentUser.dept) return '';
+    if (n.sem !== 'All' && n.sem !== currentUser.sem) return '';
+    const p = priorityConfig[n.priority] || priorityConfig.normal;
+    const deleteBtn = currentRole === 'faculty'
+      ? `<button onclick="deleteNotice('${n.id || ''}', ${idx})" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑 Delete</button>`
+      : '';
+    return `
+    <div style="border:1.5px solid ${p.border};border-radius:12px;background:${p.bg};padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span>${p.icon}</span>
+          <div style="font-size:14px;font-weight:700;color:${p.color}">${n.title}</div>
+        </div>
+        <span style="font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:20px;background:${p.color};color:white;flex-shrink:0">${n.priority}</span>
+      </div>
+      <div style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:8px">${n.content}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#6b7280;flex-wrap:wrap;gap:6px">
+        <span>Posted by ${n.by} · ${n.date}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${n.expiry ? '<span>Valid until: '+new Date(n.expiry).toLocaleDateString('en-IN')+'</span>' : ''}
+          ${deleteBtn}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFacultyNotices() {
+  const all = getStorage('notices');
+  const cont = document.getElementById('facultyNoticesList');
+  if (!cont) return;
+  if (!all.length) {
+    cont.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-dim);font-size:13px">No notices posted yet.</div>';
+    return;
+  }
+  const priorityConfig = {
+    urgent:    { color: '#dc2626', bg: '#fef2f2', border: '#fecaca', icon: '🔴' },
+    important: { color: '#ea580c', bg: '#fff7ed', border: '#fed7aa', icon: '🟠' },
+    normal:    { color: '#2563eb', bg: '#eff6ff', border: '#bfdbfe', icon: '🔵' }
+  };
+  cont.innerHTML = all.map((n, idx) => {
+    const p = priorityConfig[n.priority] || priorityConfig.normal;
+    return `<div style="border:1.5px solid ${p.border};border-radius:12px;background:${p.bg};padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span>${p.icon}</span>
+          <div style="font-size:14px;font-weight:700;color:${p.color}">${n.title}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          <span style="font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 8px;border-radius:20px;background:${p.color};color:white">${n.priority}</span>
+          <button onclick="deleteNotice('${n.id || ''}', ${idx})" style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑 Delete</button>
+        </div>
+      </div>
+      <div style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:8px">${n.content}</div>
+      <div style="font-size:11px;color:#6b7280">Posted by ${n.by} · ${n.date}${n.expiry ? ' · Valid until: '+new Date(n.expiry).toLocaleDateString('en-IN') : ''}</div>
+    </div>`;
+  }).join('');
+}
+
+async function deleteNotice(firebaseId, cacheIdx) {
+  if (!confirm('Delete this notice? This cannot be undone.')) return;
+  // Try Firebase delete first (works on Netlify)
+  if (window.FB_READY && firebaseId) {
+    try {
+      await db.collection('notices').doc(firebaseId).delete();
+      showToast('🗑️ Notice deleted!');
+      return; // Firebase listener will auto-refresh the list
+    } catch(e) {
+      console.error('Firebase delete failed:', e);
+    }
+  }
+  // Fallback: delete from local cache by index (works locally)
+  window._cache['notices'].splice(cacheIdx, 1);
+  showToast('🗑️ Notice deleted!');
+  renderNotices();
+  renderFacultyNotices();
+}
+
+// ═══ EXAM DATES ═══
+function postExam() {
+  const title = document.getElementById('exam-title').value.trim();
+  const subject = document.getElementById('exam-subject').value.trim();
+  const date = document.getElementById('exam-date').value;
+  const time = document.getElementById('exam-time').value;
+  const dept = document.getElementById('exam-dept').value;
+  const sem = document.getElementById('exam-sem').value;
+  const venue = document.getElementById('exam-venue').value.trim();
+  const notes = document.getElementById('exam-notes').value.trim();
+
+  if (!title || !date) { showToast('⚠️ Please fill exam name and date'); return; }
+
+  fbAdd('exams', { title, subject, date, time, dept, sem, venue, notes, by: currentUser.name, addedOn: new Date().toLocaleDateString('en-IN') });
+
+  ['exam-title','exam-subject','exam-date','exam-time','exam-venue','exam-notes'].forEach(id => document.getElementById(id).value = '');
+  renderFacultyExams();
+  showToast('✅ Exam date added successfully!');
+}
+
+function renderExams() {
+  const all = getStorage('exams');
+  const filtered = all.filter(e =>
+    (e.dept === 'All' || e.dept === currentUser.dept) &&
+    (e.sem === 'All' || e.sem === currentUser.sem)
+  );
+  const cont = document.getElementById('examsContent');
+  if (!filtered.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border);padding:40px"><div class="e-icon">📭</div><p>No exam dates added yet.</p></div>';
+    return;
+  }
+  const today = new Date(); today.setHours(0,0,0,0);
+  cont.innerHTML = filtered.map(e => {
+    const examDate = new Date(e.date);
+    const daysLeft = Math.ceil((examDate - today) / (1000*60*60*24));
+    const isPast = daysLeft < 0;
+    const isToday = daysLeft === 0;
+    const isSoon = daysLeft > 0 && daysLeft <= 7;
+    let badgeBg = '#eff6ff', badgeColor = '#2563eb', badgeText = daysLeft + ' days left';
+    if (isPast) { badgeBg = '#f3f4f6'; badgeColor = '#9ca3af'; badgeText = 'Completed'; }
+    if (isToday) { badgeBg = '#fef2f2'; badgeColor = '#dc2626'; badgeText = 'TODAY!'; }
+    if (isSoon && !isToday) { badgeBg = '#fff7ed'; badgeColor = '#ea580c'; }
+    return `
+    <div style="border:1px solid ${isPast ? 'var(--border)' : (isToday ? '#fecaca' : isSoon ? '#fed7aa' : 'var(--blue-mid)')};border-radius:12px;padding:14px 16px;margin-bottom:10px;background:${isPast ? 'var(--bg)' : 'white'};opacity:${isPast ? '0.7' : '1'}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:700;color:var(--text)">${e.title}</div>
+          ${e.subject ? '<div style="font-size:12px;color:var(--blue);font-weight:600;margin-top:2px">'+e.subject+'</div>' : ''}
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+            <span style="font-size:12px;color:var(--text2)">📅 ${new Date(e.date).toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short',year:'numeric'})}</span>
+            ${e.time ? '<span style="font-size:12px;color:var(--text2)">🕐 '+e.time+'</span>' : ''}
+            ${e.venue ? '<span style="font-size:12px;color:var(--text2)">📍 '+e.venue+'</span>' : ''}
+          </div>
+          ${e.notes ? '<div style="font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5">📝 '+e.notes+'</div>' : ''}
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">Added by ${e.by}</div>
+        </div>
+        <div style="flex-shrink:0;text-align:center;background:${badgeBg};color:${badgeColor};padding:6px 12px;border-radius:10px;font-size:11px;font-weight:700;min-width:70px">${badgeText}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFacultyExams() {
+  const all = getStorage('exams');
+  const cont = document.getElementById('f-exams-list');
+  if (!cont) return;
+  if (!all.length) { cont.innerHTML = '<div class="no-data">No exam dates added yet</div>'; return; }
+  cont.innerHTML = all.map((e, idx) => `
+    <div style="padding:12px;margin-bottom:8px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.01)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--text)">${e.title} — ${e.subject || ''}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">${e.dept} · ${e.sem} · ${new Date(e.date).toLocaleDateString('en-IN')} ${e.time ? '· '+e.time : ''} · By ${e.by}</div>
+        </div>
+        <button onclick="deleteExam('${e.id||''}',${idx})" style="flex-shrink:0;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer" onmouseover="this.style.background='#dc2626';this.style.color='white'" onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">🗑 Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteExam(firebaseId, cacheIdx) {
+  if (!confirm('Delete this exam date?')) return;
+  if (window.FB_READY && firebaseId) {
+    try { await db.collection('exams').doc(firebaseId).delete(); showToast('🗑️ Deleted!'); return; } catch(e) {}
+  }
+  window._cache['exams'].splice(cacheIdx, 1);
+  showToast('🗑️ Deleted!');
+  renderFacultyExams();
+}
+
+// Update dashboard to show notices count
+function updateDashboardNotices() {
+  if (!currentUser) return;
+  const notices = getStorage('notices').filter(n => (n.dept==='All'||n.dept===currentUser.dept) && (n.sem==='All'||n.sem===currentUser.sem));
+  const exams = getStorage('exams').filter(e => (e.dept==='All'||e.dept===currentUser.dept) && (e.sem==='All'||e.sem===currentUser.sem));
+  // Show urgent notices on dashboard
+  const urgent = notices.filter(n => n.priority === 'urgent').slice(0,2);
+  const upcoming = exams.filter(e => {
+    const d = Math.ceil((new Date(e.date) - new Date()) / (1000*60*60*24));
+    return d >= 0 && d <= 14;
+  }).slice(0,3);
+  return { urgent, upcoming };
+}
+
+// ── PWA / Install prompt ──
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const banner = document.getElementById('installBanner');
+  if (banner && !localStorage.getItem('pwa_dismissed')) {
+    banner.style.display = 'flex';
+    // Push mob nav up
+    document.querySelectorAll('.mob-nav').forEach(n => n.style.bottom = '72px');
+  }
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') showToast('✅ App installed! Check your home screen.');
+      deferredPrompt = null;
+      dismissInstall();
+    });
+  } else {
+    // iOS fallback instructions
+    showToast('📱 Tap Share → "Add to Home Screen" in Safari');
+    dismissInstall();
+  }
+}
+
+function dismissInstall() {
+  const banner = document.getElementById('installBanner');
+  if (banner) banner.style.display = 'none';
+  document.querySelectorAll('.mob-nav').forEach(n => n.style.bottom = '0');
+  localStorage.setItem('pwa_dismissed', '1');
+}
+
+window.addEventListener('appinstalled', () => {
+  showToast('🎉 EduPortal installed successfully!');
+  dismissInstall();
+});
+
+// ── Service Worker (offline support) ──
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'edupportal-v1';
+    const ASSETS = ['/'];
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(
+        caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('/')))
+      );
+    });
+  `;
+  const blob = new Blob([swCode], {type: 'application/javascript'});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+
+// iOS install tip — show once after login
+function showIOSInstallTip() {
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone;
+  if (isIOS && !isStandalone) {
+    const tip = document.getElementById('ios-tip');
+    if (tip) tip.style.display = 'flex';
+  }
+}
+</script>
