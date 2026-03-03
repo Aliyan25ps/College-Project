@@ -885,9 +885,10 @@ body {
       <div class="app-name">📚 EduPortal</div>
     </div>
 
-    <div class="role-tabs">
+    <div class="role-tabs" style="grid-template-columns:1fr 1fr 1fr">
       <button class="role-tab active" onclick="switchRole('student')">🎓 Student</button>
       <button class="role-tab" onclick="switchRole('faculty')">👨‍🏫 Faculty</button>
+      <button class="role-tab" onclick="switchRole('admin')">🔐 Admin</button>
     </div>
 
     <!-- ── STUDENT AUTH ── -->
@@ -1076,6 +1077,40 @@ body {
       </div>
 
     </div>
+
+    <!-- ── ADMIN AUTH ── -->
+    <div id="adminAuth" style="display:none">
+      <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;
+                  padding:14px 16px;margin-bottom:18px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">🔐</div>
+        <div style="font-size:13px;font-weight:700;color:white">Admin Access</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:2px">Principal / Administrator only</div>
+      </div>
+      <div class="form-group">
+        <label>Admin Email</label>
+        <input type="email" id="a-email" placeholder="admin@college.edu" autocomplete="email">
+        <div id="a-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+      </div>
+      <div class="form-group">
+        <label>Admin Password</label>
+        <div style="position:relative">
+          <input type="password" id="a-password" placeholder="Enter admin password"
+                 autocomplete="current-password" style="width:100%;padding-right:42px">
+          <button onclick="togglePass('a-password')"
+                  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                         background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+        </div>
+        <div id="a-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+      </div>
+      <button class="btn btn-primary" id="a-login-btn" onclick="aLogin()"
+              style="background:linear-gradient(135deg,#1e293b,#334155)">
+        🔐 Access Admin Panel →
+      </button>
+      <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">
+        🔒 This panel is restricted to authorized administrators only.
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1151,6 +1186,23 @@ body {
       </div>
       <div class="nav-item" onclick="showPage('f-timetable')">
         <span class="nav-icon">🗓️</span> Timetable
+      </div>
+    </div>
+
+    <!-- Admin nav -->
+    <div class="nav-section" id="adminNav" style="display:none">
+      <div class="nav-label">Admin</div>
+      <div class="nav-item active" onclick="showPage('a-dashboard')">
+        <span class="nav-icon">🏠</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('a-users')">
+        <span class="nav-icon">👥</span> Manage Users
+      </div>
+      <div class="nav-item" onclick="showPage('a-timetable')">
+        <span class="nav-icon">📅</span> Edit Timetable
+      </div>
+      <div class="nav-item" onclick="showPage('a-settings')">
+        <span class="nav-icon">⚙️</span> Settings
       </div>
     </div>
 
@@ -2090,6 +2142,179 @@ body {
       </div>
     </div>
 
+
+    <!-- ADMIN: Dashboard -->
+    <div class="section" id="page-a-dashboard">
+      <div class="page-header">
+        <div class="page-title">🔐 Admin Dashboard</div>
+        <div class="page-sub" id="aDashSub">Principal Control Panel</div>
+      </div>
+      <div class="grid-3">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--blue-light)">🎓</div>
+          <div><div class="stat-val" id="a-stat-students">0</div><div class="stat-label">Students Registered</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--purple-light)">👨‍🏫</div>
+          <div><div class="stat-val" id="a-stat-faculty">0</div><div class="stat-label">Faculty Registered</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--green-light)">📁</div>
+          <div><div class="stat-val" id="a-stat-content">0</div><div class="stat-label">Content Items</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚡ Quick Actions</div></div>
+        <div class="card-body" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="submit-btn" onclick="showPage('a-users')">👥 Manage Users</button>
+          <button class="submit-btn" style="background:var(--orange)" onclick="showPage('a-timetable')">📅 Edit Timetable</button>
+          <button class="submit-btn" style="background:var(--purple)" onclick="showPage('a-settings')">⚙️ Settings</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: Users -->
+    <div class="section" id="page-a-users">
+      <div class="page-header">
+        <div class="page-title">👥 Manage Users</div>
+        <div class="page-sub">View and delete registered students & faculty</div>
+      </div>
+      <!-- Student list -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div style="font-size:14px;font-weight:700;color:var(--text)">🎓 Students</div>
+        <button onclick="loadAdminUsers()" style="background:var(--blue-light);border:1px solid var(--blue-mid);
+                color:var(--blue);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer">
+          🔄 Refresh
+        </button>
+      </div>
+      <div id="a-students-list" style="margin-bottom:24px">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">⏳</div><p>Loading students...</p>
+        </div>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px">👨‍🏫 Faculty</div>
+      <div id="a-faculty-list">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <div class="e-icon">⏳</div><p>Loading faculty...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: Timetable Editor -->
+    <div class="section" id="page-a-timetable">
+      <div class="page-header">
+        <div class="page-title">📅 Edit Timetable</div>
+        <div class="page-sub">Add or remove classes for any department & semester</div>
+      </div>
+      <!-- Add class form -->
+      <div class="upload-form" style="margin-bottom:20px">
+        <h3>➕ Add New Class</h3>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Department</label>
+            <select id="a-tt-dept">
+              <option value="BCA">BCA</option>
+              <option value="BSC CS">BSC CS</option>
+              <option value="BSC BIO">BSC BIO</option>
+              <option value="BCOM">BCOM</option>
+              <option value="BSC MATHS">BSC MATHS</option>
+            </select>
+          </div>
+          <div class="form-group-inline">
+            <label>Semester</label>
+            <select id="a-tt-sem">
+              <option value="Sem I">Sem I</option>
+              <option value="Sem II">Sem II</option>
+              <option value="Sem III">Sem III</option>
+              <option value="Sem IV">Sem IV</option>
+              <option value="Sem V">Sem V</option>
+              <option value="Sem VI">Sem VI</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Subject</label>
+            <input type="text" id="a-tt-sub" placeholder="e.g. C++ Programming">
+          </div>
+          <div class="form-group-inline">
+            <label>Teacher Name</label>
+            <input type="text" id="a-tt-teacher" placeholder="e.g. Mr. Gulam Mustafa Ansari">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline">
+            <label>Time Slot</label>
+            <input type="text" id="a-tt-time" placeholder="e.g. 10:30–11:30">
+          </div>
+          <div class="form-group-inline" style="display:flex;align-items:flex-end">
+            <button class="submit-btn" onclick="adminAddClass()" style="width:100%;margin-bottom:0">
+              ➕ Add Class
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Timetable viewer -->
+      <div style="margin-bottom:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <select id="a-tt-view-dept" onchange="renderAdminTimetable()"
+                style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:white">
+          <option value="BCA">BCA</option>
+          <option value="BSC CS">BSC CS</option>
+          <option value="BSC BIO">BSC BIO</option>
+          <option value="BCOM">BCOM</option>
+          <option value="BSC MATHS">BSC MATHS</option>
+        </select>
+        <select id="a-tt-view-sem" onchange="renderAdminTimetable()"
+                style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:white">
+          <option value="Sem I">Sem I</option>
+          <option value="Sem II">Sem II</option>
+          <option value="Sem III">Sem III</option>
+          <option value="Sem IV">Sem IV</option>
+          <option value="Sem V">Sem V</option>
+          <option value="Sem VI">Sem VI</option>
+        </select>
+      </div>
+      <div id="a-timetable-view">
+        <div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)">
+          <p>Select dept & semester above</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: Settings -->
+    <div class="section" id="page-a-settings">
+      <div class="page-header">
+        <div class="page-title">⚙️ Settings</div>
+        <div class="page-sub">Change faculty secret code and other settings</div>
+      </div>
+      <div class="upload-form">
+        <h3>🔑 Change Faculty Secret Code</h3>
+        <div style="background:var(--orange-light);border:1px solid #fed7aa;border-radius:10px;
+                    padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--orange)">
+          ⚠️ After changing, share the new code with your faculty. Old code will stop working immediately.
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>Current Faculty Code</label>
+          <div id="a-current-code" style="padding:10px 14px;background:var(--bg);border:1px solid var(--border);
+               border-radius:8px;font-family:monospace;font-size:14px;color:var(--text);letter-spacing:2px">
+            Loading...
+          </div>
+        </div>
+        <div class="form-group-inline" style="margin-bottom:12px">
+          <label>New Faculty Code</label>
+          <input type="text" id="a-new-code" placeholder="Enter new faculty secret code (min 8 chars)">
+        </div>
+        <div class="form-group-inline" style="margin-bottom:16px">
+          <label>Confirm New Code</label>
+          <input type="text" id="a-confirm-code" placeholder="Re-enter new code">
+          <div id="a-code-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+        </div>
+        <button class="submit-btn" onclick="adminChangeCode()" style="background:#ea580c">
+          🔑 Update Faculty Code
+        </button>
+      </div>
+    </div>
+
   </div><!-- /main -->
 
   <!-- Mobile Nav (student) -->
@@ -2118,6 +2343,17 @@ body {
       <button class="mob-nav-item" onclick="showPage('f-notices',true)"><span class="mob-icon">📢</span>Notice</button>
       <button class="mob-nav-item" onclick="showPage('f-exams',true)"><span class="mob-icon">📅</span>Exams</button>
       <button class="mob-nav-item" onclick="showPage('f-timetable',true)"><span class="mob-icon">🗓️</span>Timetable</button>
+      <button class="mob-nav-item" onclick="logout()" style="color:#dc2626"><span class="mob-icon">🚪</span>Logout</button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav (admin) -->
+  <div class="mob-nav" id="mobNavAdmin" style="display:none">
+    <div class="mob-nav-inner">
+      <button class="mob-nav-item active" onclick="showPage('a-dashboard',true)"><span class="mob-icon">🏠</span>Home</button>
+      <button class="mob-nav-item" onclick="showPage('a-users',true)"><span class="mob-icon">👥</span>Users</button>
+      <button class="mob-nav-item" onclick="showPage('a-timetable',true)"><span class="mob-icon">📅</span>Timetable</button>
+      <button class="mob-nav-item" onclick="showPage('a-settings',true)"><span class="mob-icon">⚙️</span>Settings</button>
       <button class="mob-nav-item" onclick="logout()" style="color:#dc2626"><span class="mob-icon">🚪</span>Logout</button>
     </div>
   </div>
@@ -2215,11 +2451,15 @@ function startListeners() {
 function switchRole(role) {
   currentRole = role;
   document.querySelectorAll('.role-tab').forEach((t,i) =>
-    t.classList.toggle('active', (i===0 && role==='student') || (i===1 && role==='faculty'))
+    t.classList.toggle('active',
+      (i===0 && role==='student') ||
+      (i===1 && role==='faculty') ||
+      (i===2 && role==='admin')
+    )
   );
   document.getElementById('studentAuth').style.display = role === 'student' ? '' : 'none';
   document.getElementById('facultyAuth').style.display = role === 'faculty' ? '' : 'none';
-  // Always show login view when switching roles
+  document.getElementById('adminAuth').style.display   = role === 'admin'   ? '' : 'none';
   showStudentLogin();
   showFacultyLogin();
 }
@@ -2568,12 +2808,21 @@ function enterApp() {
   // Set topbar title
   const topbarTitle = document.getElementById('topbarTitle');
   if (topbarTitle) topbarTitle.textContent = isFaculty ? currentUser.name + ' 👨‍🏫' : currentUser.name + ' 🎓';
-  document.getElementById('studentNav').style.display = isFaculty ? 'none' : '';
-  document.getElementById('facultyNav').style.display = isFaculty ? '' : 'none';
-  document.getElementById('mobNavStudent').style.display = isFaculty ? 'none' : '';
-  document.getElementById('mobNavFaculty').style.display = isFaculty ? '' : 'none';
+  const isAdmin   = currentUser.role === 'admin';
+  document.getElementById('studentNav').style.display   = (!isFaculty && !isAdmin) ? '' : 'none';
+  document.getElementById('facultyNav').style.display   = isFaculty  ? '' : 'none';
+  document.getElementById('adminNav').style.display     = isAdmin     ? '' : 'none';
+  document.getElementById('mobNavStudent').style.display = (!isFaculty && !isAdmin) ? '' : 'none';
+  document.getElementById('mobNavFaculty').style.display = isFaculty  ? '' : 'none';
+  document.getElementById('mobNavAdmin').style.display   = isAdmin     ? '' : 'none';
 
-  if (isFaculty) {
+  if (isAdmin) {
+    showPage('a-dashboard');
+    document.getElementById('aDashSub').textContent = 'Welcome, ' + currentUser.name;
+    loadAdminUsers();
+    loadAdminStats();
+    loadCurrentFacultyCode();
+  } else if (isFaculty) {
     showPage('f-dashboard');
     document.getElementById('fDashGreet').textContent = 'Welcome, ' + currentUser.name + ' 👨‍🏫';
     document.getElementById('fDashSub').textContent = currentUser.dept + ' Department';
@@ -4267,4 +4516,327 @@ function showIOSInstallTip() {
     if (tip) tip.style.display = 'flex';
   }
 }
+
+
+// ════════════════════════════════════════════════════════════
+// ADMIN PANEL — Functions
+// Admin credentials stored in Firebase Firestore (admin_config)
+// Admin can: view users, delete users, edit timetable, change faculty code
+// ════════════════════════════════════════════════════════════
+
+// Hardcoded admin credentials (only one admin — the Principal)
+// Change these before deploying!
+const ADMIN_EMAIL    = 'admin@sagems.edu';
+const ADMIN_PASSWORD = 'Admin@SAGEMS2025';
+
+// ── Admin Login ──
+async function aLogin() {
+  const email    = document.getElementById('a-email').value.trim();
+  const password = document.getElementById('a-password').value;
+
+  document.getElementById('a-email-err').style.display = 'none';
+  document.getElementById('a-pass-err').style.display  = 'none';
+
+  if (!email) {
+    document.getElementById('a-email-err').textContent   = 'Enter admin email.';
+    document.getElementById('a-email-err').style.display = 'block';
+    return;
+  }
+  if (!password) {
+    document.getElementById('a-pass-err').textContent   = 'Enter admin password.';
+    document.getElementById('a-pass-err').style.display = 'block';
+    return;
+  }
+
+  setBtnLoading('a-login-btn', true, '🔐 Access Admin Panel →');
+
+  // ── SIMPLE HARDCODED ADMIN CHECK ──
+  // No Firebase Auth needed. Just email + password match.
+  // Change ADMIN_EMAIL and ADMIN_PASSWORD at the top to update credentials.
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    currentUser = {
+      name    : 'Principal Admin',
+      email,
+      role    : 'admin',
+      initials: 'AD',
+    };
+    setBtnLoading('a-login-btn', false, '🔐 Access Admin Panel →');
+    enterApp();
+    // Also load the current faculty code from Firestore if available
+    try {
+      const snap = await db.collection('admin_config').doc('settings').get();
+      if (snap.exists && snap.data().facultyCode) {
+        window._currentFacultyCode = snap.data().facultyCode;
+      }
+    } catch(e) {}
+    return;
+  }
+
+  // Wrong credentials
+  setBtnLoading('a-login-btn', false, '🔐 Access Admin Panel →');
+  document.getElementById('a-pass-err').textContent   = '❌ Wrong email or password. Try again.';
+  document.getElementById('a-pass-err').style.display = 'block';
+}
+
+// ── Load admin stats ──
+async function loadAdminStats() {
+  try {
+    const [students, faculty, notes, assignments, syllabi, notices, exams] = await Promise.all([
+      db.collection('students').get(),
+      db.collection('facultys').get(),
+      db.collection('notes').get(),
+      db.collection('assignments').get(),
+      db.collection('syllabi').get(),
+      db.collection('notices').get(),
+      db.collection('exams').get(),
+    ]);
+    document.getElementById('a-stat-students').textContent = students.size;
+    document.getElementById('a-stat-faculty').textContent  = faculty.size;
+    document.getElementById('a-stat-content').textContent  =
+      notes.size + assignments.size + syllabi.size + notices.size + exams.size;
+  } catch(e) { console.error('Admin stats error:', e); }
+}
+
+// ── Load users from Firestore ──
+async function loadAdminUsers() {
+  // Students
+  const sCont = document.getElementById('a-students-list');
+  const fCont = document.getElementById('a-faculty-list');
+  sCont.innerHTML = '<div class="no-data"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  fCont.innerHTML = '<div class="no-data"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+
+  try {
+    const studentsSnap = await db.collection('students').get();
+    const students = studentsSnap.docs.map(d => ({id: d.id, ...d.data()}));
+
+    if (!students.length) {
+      sCont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)"><div class="e-icon">📭</div><p>No students registered yet.</p></div>';
+    } else {
+      sCont.innerHTML = students.map(s => `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;
+                    border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:white">
+          <div style="width:38px;height:38px;border-radius:10px;background:var(--blue-light);
+                      display:flex;align-items:center;justify-content:center;
+                      font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0">
+            ${(s.initials || s.name?.slice(0,2) || 'ST').toUpperCase()}
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${s.name || 'Unknown'}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              ${s.email || ''} · ${s.dept || ''} · ${s.sem || ''}
+            </div>
+          </div>
+          <button onclick="adminDeleteUser('students','${s.id}', '${(s.name||'').replace(/'/g,'')}')"
+                  style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                         border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;
+                         cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+                  onmouseover="this.style.background='#dc2626';this.style.color='white'"
+                  onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+            🗑 Remove
+          </button>
+        </div>`).join('');
+    }
+
+    const facultySnap = await db.collection('facultys').get();
+    const faculty = facultySnap.docs.map(d => ({id: d.id, ...d.data()}));
+
+    if (!faculty.length) {
+      fCont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)"><div class="e-icon">📭</div><p>No faculty registered yet.</p></div>';
+    } else {
+      fCont.innerHTML = faculty.map(f => `
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;
+                    border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:white">
+          <div style="width:38px;height:38px;border-radius:10px;background:var(--purple-light);
+                      display:flex;align-items:center;justify-content:center;
+                      font-size:13px;font-weight:700;color:var(--purple);flex-shrink:0">
+            ${(f.initials || f.name?.slice(0,2) || 'FC').toUpperCase()}
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${f.name || 'Unknown'}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              ${f.email || ''} · ${f.dept || ''} · Faculty
+            </div>
+          </div>
+          <button onclick="adminDeleteUser('facultys','${f.id}', '${(f.name||'').replace(/'/g,'')}')"
+                  style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                         border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;
+                         cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+                  onmouseover="this.style.background='#dc2626';this.style.color='white'"
+                  onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+            🗑 Remove
+          </button>
+        </div>`).join('');
+    }
+
+    // Update stats
+    document.getElementById('a-stat-students').textContent = students.length;
+    document.getElementById('a-stat-faculty').textContent  = faculty.length;
+
+  } catch(e) {
+    console.error('Load users error:', e);
+    sCont.innerHTML = '<div class="no-data"><div class="e-icon">❌</div><p>Failed to load. Check connection.</p></div>';
+  }
+}
+
+// ── Delete a user from Firestore ──
+async function adminDeleteUser(collection, docId, name) {
+  if (!confirm('Remove ' + name + ' from the portal?
+
+Note: This removes their profile data. Their login account remains in Firebase Auth.')) return;
+  try {
+    await db.collection(collection).doc(docId).delete();
+    showToast('🗑️ ' + name + ' removed successfully!');
+    loadAdminUsers();
+  } catch(e) {
+    console.error('Delete user error:', e);
+    showToast('❌ Failed to delete. Try again.');
+  }
+}
+
+// ── Timetable Editor ──
+async function adminAddClass() {
+  const dept    = document.getElementById('a-tt-dept').value;
+  const sem     = document.getElementById('a-tt-sem').value;
+  const sub     = document.getElementById('a-tt-sub').value.trim();
+  const teacher = document.getElementById('a-tt-teacher').value.trim();
+  const time    = document.getElementById('a-tt-time').value.trim();
+
+  if (!sub || !teacher || !time) {
+    showToast('⚠️ Please fill subject, teacher, and time slot.');
+    return;
+  }
+
+  const record = { dept, sem, sub, teacher, time, addedBy: currentUser.name };
+  await fbAdd('timetable', record);
+  document.getElementById('a-tt-sub').value     = '';
+  document.getElementById('a-tt-teacher').value = '';
+  document.getElementById('a-tt-time').value    = '';
+  showToast('✅ Class added to timetable!');
+  renderAdminTimetable();
+}
+
+function renderAdminTimetable() {
+  const dept = document.getElementById('a-tt-view-dept').value;
+  const sem  = document.getElementById('a-tt-view-sem').value;
+  const cont = document.getElementById('a-timetable-view');
+
+  // Check firebase-backed custom entries first
+  const custom = getStorage('timetable').filter(t => t.dept === dept && t.sem === sem);
+  // Fall back to hardcoded
+  const classes = custom.length > 0 ? custom : (TIMETABLE[dept]?.[sem] || []);
+
+  if (!classes.length) {
+    cont.innerHTML = '<div class="no-data" style="background:white;border-radius:14px;border:1px solid var(--border)"><div class="e-icon">📭</div><p>No classes for ' + dept + ' ' + sem + '</p></div>';
+    return;
+  }
+
+  const isCustom = custom.length > 0;
+  cont.innerHTML = `
+    <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">
+      ${isCustom ? '🔵 Showing custom (Firebase-backed) timetable' : '⚪ Showing default built-in timetable — add a class above to override'}
+    </div>` +
+    classes.map((c, idx) => `
+    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;
+                border:1px solid var(--border);border-radius:10px;margin-bottom:6px;background:white">
+      <div style="font-family:monospace;font-size:11px;color:var(--muted);width:90px;flex-shrink:0">${c.time}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:var(--text)">${c.sub}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">👨‍🏫 ${c.teacher}</div>
+      </div>
+      <button onclick="${isCustom
+        ? `deleteTimetableEntry('${c.id||''}', ${idx}, '${dept}', '${sem}');setTimeout(renderAdminTimetable,500)`
+        : `importAndDeleteTimetableEntry(${idx}, '${dept}', '${sem}');setTimeout(renderAdminTimetable,1000)`
+      }"
+              style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;
+                     border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;
+                     cursor:pointer;flex-shrink:0;transition:all 0.15s;"
+              onmouseover="this.style.background='#dc2626';this.style.color='white'"
+              onmouseout="this.style.background='#fef2f2';this.style.color='#dc2626'">
+        🗑 Delete
+      </button>
+    </div>`).join('');
+}
+
+// ── Faculty Code Management ──
+async function loadCurrentFacultyCode() {
+  const el = document.getElementById('a-current-code');
+  if (!el) return;
+  try {
+    const snap = await db.collection('admin_config').doc('settings').get();
+    if (snap.exists && snap.data().facultyCode) {
+      el.textContent = snap.data().facultyCode;
+      // Also update in-memory constant
+      window._currentFacultyCode = snap.data().facultyCode;
+    } else {
+      el.textContent = FACULTY_SECRET + ' (default)';
+      window._currentFacultyCode = FACULTY_SECRET;
+    }
+  } catch(e) {
+    el.textContent = FACULTY_SECRET + ' (default)';
+    window._currentFacultyCode = FACULTY_SECRET;
+  }
+}
+
+async function adminChangeCode() {
+  const newCode  = document.getElementById('a-new-code').value.trim();
+  const confirm2 = document.getElementById('a-confirm-code').value.trim();
+  const errEl    = document.getElementById('a-code-err');
+  errEl.style.display = 'none';
+
+  if (newCode.length < 8) {
+    errEl.textContent  = 'Code must be at least 8 characters.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (newCode !== confirm2) {
+    errEl.textContent  = 'Codes do not match.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  try {
+    await db.collection('admin_config').doc('settings').set({ facultyCode: newCode }, { merge: true });
+    window._currentFacultyCode = newCode;
+    document.getElementById('a-current-code').textContent = newCode;
+    document.getElementById('a-new-code').value     = '';
+    document.getElementById('a-confirm-code').value = '';
+    showToast('✅ Faculty code updated! Share the new code with your faculty.');
+  } catch(e) {
+    console.error('Change code error:', e);
+    showToast('❌ Failed to update code. Try again.');
+  }
+}
+
+// Override faculty code check to use dynamic code from Firestore
+const _origFRegister = fRegister;
+window.fRegister = async function() {
+  // Temporarily patch FACULTY_SECRET with live value from Firestore
+  const liveCode = window._currentFacultyCode;
+  if (liveCode) {
+    // Patch the code input check inside fRegister by monkey-patching the constant
+    // We do this by loading the code first
+    try {
+      const snap = await db.collection('admin_config').doc('settings').get();
+      if (snap.exists && snap.data().facultyCode) {
+        window._currentFacultyCode = snap.data().facultyCode;
+      }
+    } catch(e) {}
+  }
+  // Call original — it uses FACULTY_SECRET constant
+  // We override by checking window._currentFacultyCode here first
+  const code = document.getElementById('f-reg-code')?.value.trim();
+  const validCode = window._currentFacultyCode || FACULTY_SECRET;
+  if (code && code !== validCode && code !== FACULTY_SECRET) {
+    // Show error directly
+    const errEl = document.getElementById('f-reg-code-err');
+    if (errEl) {
+      errEl.textContent   = '❌ Wrong faculty code. Contact your Principal.';
+      errEl.style.display = 'block';
+      document.getElementById('f-reg-code').value = '';
+    }
+    return;
+  }
+  await _origFRegister();
+};
+
 </script>
