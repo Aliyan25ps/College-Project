@@ -4848,36 +4848,6 @@ async function adminChangeCode() {
   }
 }
 
-// Override faculty code check to use dynamic code from Firestore
-const _origFRegister = fRegister;
-window.fRegister = async function() {
-  // Temporarily patch FACULTY_SECRET with live value from Firestore
-  const liveCode = window._currentFacultyCode;
-  if (liveCode) {
-    // Patch the code input check inside fRegister by monkey-patching the constant
-    // We do this by loading the code first
-    try {
-      const snap = await db.collection('admin_config').doc('settings').get();
-      if (snap.exists && snap.data().facultyCode) {
-        window._currentFacultyCode = snap.data().facultyCode;
-      }
-    } catch(e) {}
-  }
-  // Call original — it uses FACULTY_SECRET constant
-  // We override by checking window._currentFacultyCode here first
-  const code = document.getElementById('f-reg-code')?.value.trim();
-  const validCode = window._currentFacultyCode || FACULTY_SECRET;
-  if (code && code !== validCode && code !== FACULTY_SECRET) {
-    // Show error directly
-    const errEl = document.getElementById('f-reg-code-err');
-    if (errEl) {
-      errEl.textContent   = '❌ Wrong faculty code. Contact your Principal.';
-      errEl.style.display = 'block';
-      document.getElementById('f-reg-code').value = '';
-    }
-    return;
-  }
-  await _origFRegister();
-};
+// Faculty code validation handled inside fRegister function directly
 
-</script>
+</script>`
