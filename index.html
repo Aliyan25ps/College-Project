@@ -4721,9 +4721,7 @@ async function loadAdminUsers() {
 
 // ── Delete a user from Firestore ──
 async function adminDeleteUser(collection, docId, name) {
-  if (!confirm('Remove ' + name + ' from the portal?
-
-Note: This removes their profile data. Their login account remains in Firebase Auth.')) return;
+  if (!confirm('Remove ' + name + ' from the portal? This removes their profile data.')) return;
   try {
     await db.collection(collection).doc(docId).delete();
     showToast('🗑️ ' + name + ' removed successfully!');
@@ -4850,4 +4848,4 @@ async function adminChangeCode() {
 
 // Faculty code validation handled inside fRegister function directly
 
-</script>`
+</script>
