@@ -1078,39 +1078,46 @@ body {
 
     </div>
 
-    <!-- ── ADMIN AUTH ── -->
-    <div id="adminAuth" style="display:none">
-      <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;
-                  padding:14px 16px;margin-bottom:18px;text-align:center">
-        <div style="font-size:28px;margin-bottom:4px">🔐</div>
-        <div style="font-size:13px;font-weight:700;color:white">Admin Access</div>
-        <div style="font-size:11px;color:#94a3b8;margin-top:2px">Principal / Administrator only</div>
-      </div>
-      <div class="form-group">
-        <label>Admin Email</label>
-        <input type="email" id="a-email" placeholder="admin@college.edu" autocomplete="email">
-        <div id="a-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
-      </div>
-      <div class="form-group">
-        <label>Admin Password</label>
-        <div style="position:relative">
-          <input type="password" id="a-password" placeholder="Enter admin password"
-                 autocomplete="current-password" style="width:100%;padding-right:42px">
-          <button onclick="togglePass('a-password')"
-                  style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
-                         background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
-        </div>
-        <div id="a-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
-      </div>
-      <button class="btn btn-primary" id="a-login-btn" onclick="aLogin()"
-              style="background:linear-gradient(135deg,#1e293b,#334155)">
-        🔐 Access Admin Panel →
-      </button>
-      <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">
-        🔒 This panel is restricted to authorized administrators only.
-      </div>
-    </div>
+  </div>
+</div>
 
+<!-- ═══ ADMIN AUTH SCREEN (separate) ═══ -->
+<div class="auth-screen" id="adminAuthScreen" style="display:none">
+  <div class="auth-box" style="max-width:380px">
+    <div class="auth-logo">
+      <div class="college-name">Swami Atmanand Govt. English Medium Model College</div>
+      <div class="college-sub">Somni, Rajnandgaon · Affiliated to Hemchand Yadav Vishwavidyalay, Durg</div>
+      <div class="app-name">🔐 Admin Panel</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;
+                padding:14px 16px;margin-bottom:18px;text-align:center">
+      <div style="font-size:13px;font-weight:700;color:white">Principal / Administrator Access</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:2px">Restricted area — authorized personnel only</div>
+    </div>
+    <div class="form-group">
+      <label>Admin Email</label>
+      <input type="email" id="a-email" placeholder="admin@sagems.edu" autocomplete="email">
+      <div id="a-email-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+    </div>
+    <div class="form-group">
+      <label>Admin Password</label>
+      <div style="position:relative">
+        <input type="password" id="a-password" placeholder="Enter admin password"
+               autocomplete="current-password" style="width:100%;padding-right:42px"
+               onkeydown="if(event.key==='Enter') aLogin()">
+        <button onclick="togglePass('a-password')"
+                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                       background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)">👁</button>
+      </div>
+      <div id="a-pass-err" style="color:#dc2626;font-size:11px;margin-top:4px;display:none"></div>
+    </div>
+    <button class="btn btn-primary" id="a-login-btn" onclick="aLogin()"
+            style="background:linear-gradient(135deg,#1e293b,#334155)">
+      🔐 Access Admin Panel →
+    </button>
+    <button class="btn btn-secondary" onclick="backToMainLogin()" style="margin-top:8px">
+      ← Back to Main Login
+    </button>
   </div>
 </div>
 
@@ -2457,11 +2464,33 @@ function switchRole(role) {
       (i===2 && role==='admin')
     )
   );
-  document.getElementById('studentAuth').style.display = role === 'student' ? '' : 'none';
-  document.getElementById('facultyAuth').style.display = role === 'faculty' ? '' : 'none';
-  document.getElementById('adminAuth').style.display   = role === 'admin'   ? '' : 'none';
+  if (role === 'admin') {
+    // Show separate admin login screen
+    document.getElementById('authScreen').style.display      = 'none';
+    document.getElementById('adminAuthScreen').style.display = '';
+    // Clear fields
+    document.getElementById('a-email').value    = '';
+    document.getElementById('a-password').value = '';
+    document.getElementById('a-email-err').style.display = 'none';
+    document.getElementById('a-pass-err').style.display  = 'none';
+  } else {
+    document.getElementById('authScreen').style.display      = '';
+    document.getElementById('adminAuthScreen').style.display = 'none';
+    document.getElementById('studentAuth').style.display = role === 'student' ? '' : 'none';
+    document.getElementById('facultyAuth').style.display = role === 'faculty' ? '' : 'none';
+    showStudentLogin();
+    showFacultyLogin();
+  }
+}
+
+function backToMainLogin() {
+  document.getElementById('adminAuthScreen').style.display = 'none';
+  document.getElementById('authScreen').style.display      = '';
+  currentRole = 'student';
+  document.querySelectorAll('.role-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  document.getElementById('studentAuth').style.display = '';
+  document.getElementById('facultyAuth').style.display = 'none';
   showStudentLogin();
-  showFacultyLogin();
 }
 
 // OTP helpers
@@ -2792,8 +2821,9 @@ async function fRegister() {
 }
 
 function enterApp() {
-  document.getElementById('authScreen').style.display = 'none';
-  document.getElementById('appShell').style.display = 'block';
+  document.getElementById('authScreen').style.display      = 'none';
+  document.getElementById('adminAuthScreen').style.display = 'none';
+  document.getElementById('appShell').style.display        = 'block';
 
   const isFaculty = currentUser.role === 'faculty';
 
@@ -2844,9 +2874,15 @@ function enterApp() {
 
 function logout() {
   currentUser = null;
-  document.getElementById('authScreen').style.display = '';
-  document.getElementById('appShell').style.display = 'none';
-  switchRole('student');
+  document.getElementById('authScreen').style.display      = '';
+  document.getElementById('adminAuthScreen').style.display = 'none';
+  document.getElementById('appShell').style.display        = 'none';
+  currentRole = 'student';
+  document.querySelectorAll('.role-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  document.getElementById('studentAuth').style.display = '';
+  document.getElementById('facultyAuth').style.display = 'none';
+  showStudentLogin();
+  showFacultyLogin();
 }
 
 // ═══ NAVIGATION ═══
